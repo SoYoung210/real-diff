@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "version": "0.0.1",
+  "name": "pr-lockulator",
+  "description": "Calculate lock file diff in Pull Request",
+  "browser_action": {
+    "default_icon": "icon/icon_16x16.png",
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "icon/icon_16x16.png",
+    "48": "icon/icon_64x64.png",
+    "128": "icon/icon_128x128.png"
+  },
+  "homepage_url": "https://github.com/SoYoung210/pr-lockulator",
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*/*/pull/*/files"],
+      "run_at": "document_end",
+      "js": ["js/vendor.js", "js/main.js"]
+    }
+  ]
+}
