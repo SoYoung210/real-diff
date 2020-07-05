@@ -1,7 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import { configureStore } from '@reduxjs/toolkit'
 
-const rootReducer = combineReducers({})
+import { PR_SLICE,prReducer } from './prSlice'
+
+const rootReducer = combineReducers({
+  [PR_SLICE]: prReducer,
+})
 
 const store = configureStore({ reducer: rootReducer })
 
