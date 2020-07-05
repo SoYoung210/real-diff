@@ -1,35 +1,25 @@
 {
-  "manifest_version": 2,
-  "version": "0.0.1",
-  "name": "pr-lockulator",
-  "description": "Calculate lock file diff in Pull Request",
-  "browser_action": {
-    "default_icon": "icon/icon_16x16.png",
-    "default_popup": "index.html"
-  },
-  "icons": {
-    "16": "icon/icon_16x16.png",
-    "48": "icon/icon_64x64.png",
-    "128": "icon/icon_128x128.png"
-  },
-  "homepage_url": "https://github.com/SoYoung210/pr-lockulator",
-  "commands": {
-    "_execute_browser_action": {
-      "suggested_key": {
-        "windows": "Alt+Shift+D",
-        "linux": "Alt+Shift+D",
-        "chromeos": "Alt+Shift+D",
-        "mac": "Command+Shift+D",
-        "default": "Ctrl+Shift+D"
-      },
-      "description": "open_popup"
-    }
-  },
-  "content_scripts": [
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "icons": [
     {
-      "matches": ["https://github.com/*/*/pull/*/files"],
-      "run_at": "document_end",
-      "js": ["js/vendor.js", "js/main.js"]
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
-  ]
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
 }
