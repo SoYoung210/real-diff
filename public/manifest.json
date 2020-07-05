@@ -13,6 +13,18 @@
     "128": "icon/icon_128x128.png"
   },
   "homepage_url": "https://github.com/SoYoung210/pr-lockulator",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+Shift+D",
+        "linux": "Alt+Shift+D",
+        "chromeos": "Alt+Shift+D",
+        "mac": "Command+Shift+D",
+        "default": "Ctrl+Shift+D"
+      },
+      "description": "open_popup"
+    }
+  },
   "content_scripts": [
     {
       "matches": ["https://github.com/*/*/pull/*/files"],
