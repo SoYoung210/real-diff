@@ -22,7 +22,7 @@ const initialState: SettingInfoState = {
 
 const reducers = {
   // TODO: Refactor, payload를 state로 관리하지 않아도 될듯.
-  fetch: (state: SettingInfoState, { payload }: PayloadAction<UserInfoInterface>) => {
+  saveData: (state: SettingInfoState, { payload }: PayloadAction<UserInfoInterface>) => {
     state.userInfo = payload
   },
 }

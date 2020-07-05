@@ -2,6 +2,8 @@ import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
+import { userInfoActions } from '@/features/tokenSlice'
+
 const Layout = styled.div`
   margin: 10px;
   width: 280px;
@@ -29,6 +31,15 @@ export default () => {
   const dispatch = useDispatch()
   const [token, setToken] = useState('')
 
+  const saveToken = () => {
+    console.log('save Token')
+    // TODO: name TBD
+    dispatch(userInfoActions.saveData({
+      name: '',
+      token,
+    }))
+  }
+
   return (
     <Layout>
       <Head>Add GitHub API Token</Head>
@@ -38,7 +49,7 @@ export default () => {
           setToken(target.value)
         }
       />
-      <SaveButton>Save</SaveButton>
+      <SaveButton onClick={saveToken}>Save</SaveButton>
     </Layout>
   )
 }
