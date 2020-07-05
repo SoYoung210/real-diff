@@ -3,12 +3,18 @@ export enum STORAGE_KEY {
 }
 
 const saveData = <T>(key: STORAGE_KEY, value: T) => (
-  localStorage.setItem( key, JSON.stringify(value))
+  localStorage.setItem(key, JSON.stringify(value))
 )
 
-const getData = <T>(key: STORAGE_KEY): T => (
-  JSON.parse(localStorage.getItem(key) as string)
-)
+const getData = <T>(key: STORAGE_KEY): T | undefined => {
+  const rawData = window.localStorage.getItem(key)
+
+  if (!rawData) {
+    return undefined
+  }
+
+  return JSON.parse(rawData)
+}
 
 const hasValue = (keys: STORAGE_KEY[] | STORAGE_KEY): boolean => {
   if (!Array.isArray(keys)) {
