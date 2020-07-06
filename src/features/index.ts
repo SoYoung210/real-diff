@@ -4,8 +4,8 @@ import createSagaMiddleware from 'redux-saga'
 import { all } from 'redux-saga/effects'
 
 import { PR_SLICE,prReducer } from './prSlice'
-import { watchSaveUserToken } from './tokenSaga'
-import { USER_INFO,userInfoReducer } from './tokenSlice'
+import { watchSaveUserToken } from './settingSaga'
+import { USER_INFO,userInfoReducer } from './settingSlice'
 
 const rootReducer = combineReducers({
   [PR_SLICE]: prReducer,
