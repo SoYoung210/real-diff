@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { userInfoActions } from '@/features/tokenSlice'
+import { userInfoActions } from '@/features/settingSlice'
 
 const Layout = styled.div`
   margin: 10px;
