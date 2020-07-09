@@ -8,12 +8,11 @@ export enum FetchStatusCode {
   UNKNOWN = 500,
   NOT_FOUND = 404,
 }
-
+// TODO: use octokit/core.js https://github.com/octokit/core.js#readme
 const axiosInstance = (token: string): AxiosInstance => {
   const headers = {
-    Accept: 'application/json',
-    Pragma: 'no-cache',
-    Authorization: token,
+    Accept: 'application/vnd.github.v3+json',
+    Authorization: `Bearer ${token}`,
   }
 
   return axios.create({
