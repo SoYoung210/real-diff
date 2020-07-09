@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
 import { all } from 'redux-saga/effects'
 
+import { watchFetchPullRequest } from './prSaga'
 import { PR_SLICE,prReducer } from './prSlice'
 import { watchSaveUserToken } from './settingSaga'
 import { USER_INFO,userInfoReducer } from './settingSlice'
@@ -16,6 +17,7 @@ export const sagaMiddleware = createSagaMiddleware()
 export function* rootSaga() {
   yield all([
     watchSaveUserToken(),
+    watchFetchPullRequest(),
   ])
 }
 

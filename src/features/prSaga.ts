@@ -1,7 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { select } from 'redux-saga/effects'
+import { select, takeLatest } from 'redux-saga/effects'
 
 import { tokenSelector } from '@/features/settingSlice'
+
+import { prActions } from './prSlice'
 
 function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
   // ['', 'SoYoung210', 'real-diff', 'pull', '1']
@@ -13,5 +15,13 @@ function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
     prNumber: pathName[4],
   }
   const { token } = yield select(tokenSelector.token)
+  console.log('parsedPathName')
 
+}
+
+export function* watchFetchPullRequest() {
+  yield takeLatest(
+    prActions.fetch,
+    fetchPullRequestFiles,
+  )
 }
