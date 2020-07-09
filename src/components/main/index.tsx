@@ -1,6 +1,5 @@
-import styled from '@emotion/styled'
 import React, { useEffect } from 'react'
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { prActions } from '@/features/prSlice'
