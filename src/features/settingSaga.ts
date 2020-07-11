@@ -4,10 +4,10 @@ import { call,takeLatest } from 'redux-saga/effects'
 import { redirect } from '@/utils/history'
 import { localStorageUtil, STORAGE_KEY } from '@/utils/localStorage'
 
-import { userInfoActions,UserInfoInterface } from './settingSlice'
-function* saveUserToken({payload}: PayloadAction<UserInfoInterface>) {
+import { userInfoActions } from './settingSlice'
+function* saveUserToken({payload}: PayloadAction<string>) {
   yield localStorageUtil.saveData(
-    STORAGE_KEY.USER_INFO,
+    STORAGE_KEY.GITHUB_TOKEN,
     payload,
   )
 

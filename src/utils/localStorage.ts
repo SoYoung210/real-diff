@@ -1,5 +1,5 @@
 export enum STORAGE_KEY {
-  USER_INFO = '@@REAL_DIFF/USER_INFO',
+  GITHUB_TOKEN = '@@REAL_DIFF/GITHUB_TOKEN',
 }
 
 const saveData = <T>(key: STORAGE_KEY, value: T) => (

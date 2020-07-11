@@ -24,7 +24,7 @@ function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
     prNumber: 1,
   }
   const { orgName, repository, prNumber } = parsedPathName
-  const { token } = yield select(tokenSelector.token)
+  const token = yield select(tokenSelector.token)
 
   let page = 1
   let result: PullRequestData[] = []

@@ -40,11 +40,7 @@ export const SettingsView = () => {
   const [token, setToken] = useState('')
 
   const saveToken = () => {
-    // TODO: name TBD
-    dispatch(userInfoActions.saveData({
-      name: '',
-      token,
-    }))
+    dispatch(userInfoActions.saveData(token))
   }
 
   return (

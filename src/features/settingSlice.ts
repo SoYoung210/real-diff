@@ -4,28 +4,23 @@ import { localStorageUtil, STORAGE_KEY } from '@/utils/localStorage'
 
 import { RootState } from '.'
 
-export interface UserInfoInterface {
-  name?: string
-  token?: string
-}
-
 interface SettingInfoState {
-  userInfo: UserInfoInterface
+  token: string
 }
 
-const userInfoFromStorage =
-  localStorageUtil.getData<UserInfoInterface>(
-    STORAGE_KEY.USER_INFO,
+const tokenFromStorage =
+  localStorageUtil.getData<string>(
+    STORAGE_KEY.GITHUB_TOKEN,
   )
 
 const initialState: SettingInfoState = {
-  userInfo: userInfoFromStorage || { name: '', token: '' },
+  token: tokenFromStorage || '',
 }
 
 const reducers = {
   // TODO: Refactor, payload를 state로 관리하지 않아도 될듯.
-  saveData: (state: SettingInfoState, { payload }: PayloadAction<UserInfoInterface>) => {
-    state.userInfo = payload
+  saveData: (state: SettingInfoState, { payload }: PayloadAction<string>) => {
+    state.token = payload
   },
 }
 
@@ -36,19 +31,8 @@ const slice = createSlice({
   reducers,
 })
 const settingState = (state: RootState) => state[USER_INFO]
-const getToken = (state: SettingInfoState) => {
-  // if (state.userInfo.token === '') {
-  //   return {
-  //     isEmpty: false,
-  //     token: '',
-  //   }
-  // }
+const getToken = (state: SettingInfoState) => state.token
 
-  return {
-    // isEmpty: false,
-    token: state.userInfo.token,
-  }
-}
 export const tokenSelector = {
   token: createSelector([settingState], getToken),
 }
