@@ -1,6 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { takeLatest } from 'redux-saga/effects'
+import { call,takeLatest } from 'redux-saga/effects'
 
+import { redirect } from '@/utils/history'
 import { localStorageUtil, STORAGE_KEY } from '@/utils/localStorage'
 
 import { userInfoActions,UserInfoInterface } from './settingSlice'
@@ -9,6 +10,8 @@ function* saveUserToken({payload}: PayloadAction<UserInfoInterface>) {
     STORAGE_KEY.USER_INFO,
     payload,
   )
+
+  yield call(redirect, '/')
 }
 
 export function* watchSaveUserToken() {
