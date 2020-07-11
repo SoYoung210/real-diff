@@ -10,11 +10,13 @@ interface PullRequestFilesData {
 
 interface PullRequestFilesState {
   data: PullRequestFilesData[];
+  realDiff: number;
   fetchState: FetchStatusCode
 }
 
 const initialState: PullRequestFilesState = {
   data: [],
+  realDiff: 0,
   fetchState: FetchStatusCode.DEFAULT,
 }
 
@@ -29,6 +31,9 @@ const reducers = {
   fail: (state: PullRequestFilesState, { payload }: PayloadAction<FetchStatusCode>) => {
     state.data = initialState.data
     state.fetchState = payload
+  },
+  setRealDiff: (state: PullRequestFilesState, { payload }: PayloadAction<number>) => {
+    state.realDiff = payload
   },
 }
 
