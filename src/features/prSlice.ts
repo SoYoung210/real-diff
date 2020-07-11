@@ -1,6 +1,7 @@
 import { createSelector,createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { FetchStatusCode } from '@/api'
+import { RealDiffData } from '@/domain/pullRequest'
 
 import { RootState } from '.'
 
@@ -12,13 +13,16 @@ interface PullRequestFilesData {
 
 interface PullRequestFilesState {
   data: PullRequestFilesData[];
-  realDiff: number;
+  realDiff: RealDiffData;
   fetchState: FetchStatusCode
 }
 
 const initialState: PullRequestFilesState = {
   data: [],
-  realDiff: 0,
+  realDiff: {
+    additions: 0,
+    deletions: 0,
+  },
   fetchState: FetchStatusCode.DEFAULT,
 }
 
@@ -34,7 +38,7 @@ const reducers = {
     state.data = initialState.data
     state.fetchState = payload
   },
-  setRealDiff: (state: PullRequestFilesState, { payload }: PayloadAction<number>) => {
+  setRealDiff: (state: PullRequestFilesState, { payload }: PayloadAction<RealDiffData>) => {
     state.realDiff = payload
   },
 }

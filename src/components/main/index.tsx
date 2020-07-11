@@ -13,8 +13,8 @@ export const MainView = () => {
 
   return (
     <>
-      <div>MainView</div>
-      <h1>Real Diff: {realDiff}</h1>
+      <div>Real Additions: {realDiff.additions}</div>
+      <div>Real Deletions: {realDiff.deletions}</div>
       <Link to='/settings'>Setting</Link>
     </>
   )

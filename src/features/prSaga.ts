@@ -2,7 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit'
 import { call,put,select, takeLatest } from 'redux-saga/effects'
 
 import { pullRequestAPI } from '@/api'
-import { PullRequestInfo } from '@/domain/pullRequest'
+import { PullRequestData } from '@/domain/pullRequest'
 import { tokenSelector } from '@/features/settingSlice'
 import { filterIgnoredFiles } from '@/utils/ignoredFileFilter'
 
@@ -28,15 +28,24 @@ function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
 
   // FIXME: Bug... pagination있음. file changed 46인데 30개 불러옴.
   // TODO: Pagination기능 추가.
-  const data: PullRequestInfo[] = yield call(
+  const data: PullRequestData[] = yield call(
     pullRequestAPI,
     token,
     `/repos/${orgName}/${repository}/pulls/${prNumber}/files?per_page=100`,
   )
 
-  const totalChangedLines = data.reduce((acc, curr) => {
-    return acc + curr.changes
-  }, 0)
+  const {
+    totalAdditions,
+    totalDeletions,
+  } = data.reduce((acc, curr) => {
+    return {
+      totalAdditions: acc.totalAdditions + curr.additions,
+      totalDeletions: acc.totalDeletions + curr.deletions,
+    }
+  }, {
+    totalAdditions: 0,
+    totalDeletions:0,
+  })
   console.log('@@ Data', data)
 
   const filterFiles = filterIgnoredFiles([
@@ -44,17 +53,29 @@ function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
     'yarn.lock',
   ])
 
-  const ignoredList = data
+  const {
+    ignoredAdditions,
+    ignoredDeletions,
+  } = data
     .filter(fileInfo => filterFiles(fileInfo.filename))
     .reduce((acc, curr) => {
-      return acc + curr.changes
-    }, 0)
-  const result = totalChangedLines - ignoredList
-  console.log('@@ totalChangedLines', totalChangedLines)
-  console.log('@@ ignoredList', ignoredList)
-  console.log('@@ result', result)
+      return {
+        ignoredAdditions: acc.ignoredAdditions + curr.additions,
+        ignoredDeletions: acc.ignoredDeletions + curr.deletions,
+      }
+    }, {
+      ignoredAdditions: 0,
+      ignoredDeletions:0,
+    })
+  const realDiff = {
+    additions: totalAdditions - ignoredAdditions,
+    deletions: totalDeletions - ignoredDeletions,
+  }
+  console.log('@@ totalChangedLines', totalAdditions)
+  console.log('@@ ignoredList', ignoredAdditions)
+  console.log('@@ result', realDiff)
 
-  yield put(prActions.setRealDiff(result))
+  yield put(prActions.setRealDiff(realDiff))
 }
 
 export function* watchFetchPullRequest() {
