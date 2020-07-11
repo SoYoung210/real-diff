@@ -2,13 +2,13 @@ export enum STORAGE_KEY {
   GITHUB_TOKEN = '@@REAL_DIFF/GITHUB_TOKEN',
 }
 
-const saveData = <T>(key: STORAGE_KEY, value: T) => new Promise<void>((resolve, _) => {
+const saveData = <T>(key: STORAGE_KEY, value: T) => new Promise<void>((resolve) => {
   chrome.storage.sync.set({[key]: value}, function () {
     resolve(console.log('🚀 Token Saved!'))
   })
 })
 // FIXME: type
-const getData = <T>(key: STORAGE_KEY): any => new Promise<any>((resolve, _) => {
+const getData = <T>(key: STORAGE_KEY): any => new Promise<any>((resolve) => {
   chrome.storage.sync.get(key, function (items) {
     console.log('@@ items',items)
 
