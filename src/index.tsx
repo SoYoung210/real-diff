@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route,Switch } from 'react-router-dom'
 
-import App from '@/components/App'
 import store, { rootSaga,sagaMiddleware } from '@/features'
 
 import { MainView } from './components/main'
@@ -25,7 +24,6 @@ ReactDOM.render(
           <Route path='/settings' component={SettingsView} />
           <Route path='/' component={MainView} />
         </Switch>
-        {/* <App /> */}
       </BrowserRouter>
     </Layout>
   </Provider>,
