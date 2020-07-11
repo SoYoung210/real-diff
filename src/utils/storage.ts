@@ -2,27 +2,19 @@ export enum STORAGE_KEY {
   GITHUB_TOKEN = '@@REAL_DIFF/GITHUB_TOKEN',
 }
 
-const saveData = <T>(key: STORAGE_KEY, value: T) => (
-  // localStorage.setItem(key, JSON.stringify(value))
+const saveData = <T>(key: STORAGE_KEY, value: T) => new Promise<void>((resolve, _) => {
   chrome.storage.sync.set({[key]: value}, function () {
-    console.log('🚀 Token Saved!')
+    resolve(console.log('🚀 Token Saved!'))
   })
-)
+})
 // FIXME: type
-const getData = <T>(key: STORAGE_KEY): any => {
-  const rawData = window.localStorage.getItem(key)
-
+const getData = <T>(key: STORAGE_KEY): any => new Promise<any>((resolve, _) => {
   chrome.storage.sync.get(key, function (items) {
     console.log('@@ items',items)
 
-    return items
+    return resolve(items)
   })
-  // if (!rawData) {
-  //   return undefined
-  // }
-
-  // return JSON.parse(rawData)
-}
+})
 
 const hasValue = (keys: STORAGE_KEY[] | STORAGE_KEY): boolean => {
   if (!Array.isArray(keys)) {
@@ -32,7 +24,7 @@ const hasValue = (keys: STORAGE_KEY[] | STORAGE_KEY): boolean => {
   return keys.every(key => localStorage.hasOwnProperty(key))
 }
 
-export const localStorageUtil = {
+export const storageUtil = {
   saveData,
   getData,
   hasValue,
