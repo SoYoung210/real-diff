@@ -20,20 +20,3 @@ jobs:
         run: yarn
       - name: Check Lint
         run: npm run test
-
-  build:
-    name: Build
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10'
-      - name: Install Dependencies
-        run: yarn
-      - name: Build Test
-        run: npm run build
