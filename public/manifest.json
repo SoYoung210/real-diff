@@ -1,28 +1,17 @@
 {
   "manifest_version": 2,
+  "version": "0.0.1",
   "name": "Real Diff",
   "description": "Calculate Pull Request Real Diff",
   "browser_action": {
-    "default_icon": "logo192.png",
+    "default_icon": "icon/icon_16x16.png",
     "default_popup": "index.html"
   },
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
+  "icons": {
+    "16": "icon/icon_16x16.png",
+    "48": "icon/icon_64x64.png",
+    "128": "icon/icon_128x128.png"
+  },
   "permissions": ["storage"],
   "start_url": ".",
   "commands": {
@@ -39,5 +28,7 @@
   },
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "content_security_policy":
+    "script-src 'self' 'sha256-VCSQgQD+u6aI1GbN9qMh4VqJYnazKlasWFYPQspyPJI='; object-src 'self'"
 }
