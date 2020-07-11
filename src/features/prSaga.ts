@@ -26,10 +26,12 @@ function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
   const { orgName, repository, prNumber } = parsedPathName
   const { token } = yield select(tokenSelector.token)
 
+  // FIXME: Bug... pagination있음. file changed 46인데 30개 불러옴.
+  // TODO: Pagination기능 추가.
   const data: PullRequestInfo[] = yield call(
     pullRequestAPI,
     token,
-    `/repos/${orgName}/${repository}/pulls/${prNumber}/files`,
+    `/repos/${orgName}/${repository}/pulls/${prNumber}/files?per_page=100`,
   )
 
   const totalChangedLines = data.reduce((acc, curr) => {
