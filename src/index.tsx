@@ -4,11 +4,10 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { Route,Router,Switch } from 'react-router-dom'
 
+import { MainView } from '@/components/main'
+import { SettingsView } from '@/components/settings/index'
 import store, { rootSaga,sagaMiddleware } from '@/features'
-
-import { MainView } from './components/main'
-import { SettingsView } from './components/settings/index'
-import { history} from './utils/history'
+import { history} from '@/utils/history'
 sagaMiddleware.run(rootSaga)
 
 const Layout = styled.div`
