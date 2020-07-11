@@ -1,6 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSelector,createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { FetchStatusCode } from '@/api'
+
+import { RootState } from '.'
 
 interface PullRequestFilesData {
   filename: string;
@@ -38,6 +40,7 @@ const reducers = {
 }
 
 const sliceName = 'pullRequestFiles'
+
 const slice = createSlice({
   name: sliceName,
   initialState,
@@ -47,3 +50,10 @@ const slice = createSlice({
 export const PR_SLICE = sliceName
 export const prReducer = slice.reducer
 export const prActions = slice.actions
+
+const prState = (state: RootState) => state[PR_SLICE]
+
+const getRealDiff = (state: PullRequestFilesState) => state.realDiff
+export const prSelector = {
+  realDiff: createSelector([prState], getRealDiff),
+}
