@@ -26,18 +26,26 @@ function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
   const { orgName, repository, prNumber } = parsedPathName
   const { token } = yield select(tokenSelector.token)
 
-  // FIXME: Bug... pagination있음. file changed 46인데 30개 불러옴.
-  // TODO: Pagination기능 추가.
-  const data: PullRequestData[] = yield call(
-    pullRequestAPI,
-    token,
-    `/repos/${orgName}/${repository}/pulls/${prNumber}/files?per_page=100`,
-  )
+  let page = 1
+  let result: PullRequestData[] = []
+
+  while (true) {
+    const data: PullRequestData[] = yield call(
+      pullRequestAPI,
+      token,
+      `/repos/${orgName}/${repository}/pulls/${prNumber}/files?page=${page}`,
+    )
+    if (data.length === 0) {
+      break
+    }
+    result.push(...data)
+    page = page + 1
+  }
 
   const {
     totalAdditions,
     totalDeletions,
-  } = data.reduce((acc, curr) => {
+  } = result.reduce((acc, curr) => {
     return {
       totalAdditions: acc.totalAdditions + curr.additions,
       totalDeletions: acc.totalDeletions + curr.deletions,
@@ -46,7 +54,7 @@ function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
     totalAdditions: 0,
     totalDeletions:0,
   })
-  console.log('@@ Data', data)
+  console.log('@@ Data', result)
 
   const filterFiles = filterIgnoredFiles([
     'package-lock.json',
@@ -56,7 +64,7 @@ function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
   const {
     ignoredAdditions,
     ignoredDeletions,
-  } = data
+  } = result
     .filter(fileInfo => filterFiles(fileInfo.filename))
     .reduce((acc, curr) => {
       return {
