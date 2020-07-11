@@ -1,6 +1,11 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "manifest_version": 2,
+  "name": "Real Diff",
+  "description": "Calculate Pull Request Real Diff",
+  "browser_action": {
+    "default_icon": "logo192.png",
+    "default_popup": "index.html"
+  },
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,7 +23,20 @@
       "sizes": "512x512"
     }
   ],
+  "permissions": ["storage"],
   "start_url": ".",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+Shift+K",
+        "linux": "Alt+Shift+K",
+        "chromeos": "Alt+Shift+K",
+        "mac": "Command+Shift+K",
+        "default": "Ctrl+Shift+K"
+      },
+      "description": "open_popup"
+    }
+  },
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
