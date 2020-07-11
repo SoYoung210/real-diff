@@ -1,6 +1,6 @@
 import { createSelector,createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { localStorageUtil, STORAGE_KEY } from '@/utils/storage'
+import { STORAGE_KEY,storageUtil } from '@/utils/storage'
 
 import { RootState } from '.'
 
@@ -8,8 +8,9 @@ interface SettingInfoState {
   token: string
 }
 
+// TODO: init할때 띄워야되네..
 const tokenFromStorage =
-  localStorageUtil.getData<string>(
+  storageUtil.getData<string>(
     STORAGE_KEY.GITHUB_TOKEN,
   )
 
