@@ -1,6 +1,6 @@
 import { createSelector,createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { localStorageUtil, STORAGE_KEY } from '@/utils/localStorage'
+import { localStorageUtil, STORAGE_KEY } from '@/utils/storage'
 
 import { RootState } from '.'
 

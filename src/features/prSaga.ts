@@ -9,25 +9,32 @@ import { filterIgnoredFiles } from '@/utils/ignoredFileFilter'
 
 import { prActions } from './prSlice'
 
+const urlPath = () => new Promise<string>((resolve, _) => {
+  chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+    resolve(tabs[0].url)
+  })
+})
+
 function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
   // ['', 'SoYoung210', 'real-diff', 'pull', '1']
   try {
-    const pathName = payload.split('/')
+    const path = yield call(urlPath)
+    const pathName = path.split('/')
     // TODO: Refactor
-    // const parsedPathName = {
-    //   orgName: pathName[1],
-    //   repository: pathName[2],
-    //   prNumber: pathName[4],
-    // }
-    // FIXME: Test 환경 값에 따라 목데이터 분리하기
     const parsedPathName = {
-      orgName: 'SoYoung210',
-      repository: 'real-diff',
-      prNumber: 1,
+      orgName: pathName[3],
+      repository: pathName[4],
+      prNumber: pathName[6],
     }
+    // FIXME: Test 환경 값에 따라 목데이터 분리하기
+    // const parsedPathName = {
+    //   orgName: 'SoYoung210',
+    //   repository: 'real-diff',
+    //   prNumber: 1,
+    // }
     const { orgName, repository, prNumber } = parsedPathName
     const token = yield select(tokenSelector.token)
-
+    console.log('@@ pathName',pathName)
     let page = 1
     let result: PullRequestData[] = []
 
