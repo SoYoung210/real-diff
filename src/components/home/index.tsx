@@ -1,8 +1,7 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
 
-import { FetchStateWrapper } from '@/components/shared/FetchStateWrapper'
 import { settingActions, settingSelector } from '@/features/settingSlice'
 
 export const HomeView = () => {

@@ -2,7 +2,6 @@ import { createSelector,createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { FetchStatusCode } from '@/api'
 import { PathData } from '@/domain/pullRequest'
-import { STORAGE_KEY,storageUtil } from '@/utils/storage'
 
 import { RootState } from '.'
 
