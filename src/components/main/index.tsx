@@ -8,7 +8,7 @@ export const MainView = () => {
   const dispatch = useDispatch()
   const realDiff = useSelector(prSelector.realDiff)
   useEffect(() => {
-    dispatch(prActions.fetch(window.location.pathname))
+    dispatch(prActions.fetch())
   },[dispatch])
 
   return (

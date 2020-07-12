@@ -15,7 +15,7 @@ const urlPath = () => new Promise<string>((resolve, _) => {
   })
 })
 
-function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
+function* fetchPullRequestFiles() {
   // ['', 'SoYoung210', 'real-diff', 'pull', '1']
   try {
     const path = yield call(urlPath)
