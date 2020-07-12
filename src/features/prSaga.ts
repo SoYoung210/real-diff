@@ -3,7 +3,7 @@ import { call,put,select, takeLatest } from 'redux-saga/effects'
 
 import { pullRequestAPI } from '@/api'
 import { PullRequestData } from '@/domain/pullRequest'
-import { tokenSelector } from '@/features/settingSlice'
+import { settingSelector } from '@/features/settingSlice'
 import { redirect } from '@/utils/history'
 import { filterIgnoredFiles } from '@/utils/ignoredFileFilter'
 
@@ -33,7 +33,7 @@ function* fetchPullRequestFiles() {
     //   prNumber: 1,
     // }
     const { orgName, repository, prNumber } = parsedPathName
-    const token = yield select(tokenSelector.token)
+    const token = yield select(settingSelector.token)
     console.log('@@ pathName',pathName)
     let page = 1
     let result: PullRequestData[] = []

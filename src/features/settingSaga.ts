@@ -4,7 +4,7 @@ import { call,takeLatest } from 'redux-saga/effects'
 import { redirect } from '@/utils/history'
 import { STORAGE_KEY,storageUtil } from '@/utils/storage'
 
-import { userInfoActions } from './settingSlice'
+import { settingActions } from './settingSlice'
 
 function* saveUserToken({payload}: PayloadAction<string>) {
   yield call(
@@ -18,7 +18,7 @@ function* saveUserToken({payload}: PayloadAction<string>) {
 
 export function* watchSaveUserToken() {
   yield takeLatest(
-    userInfoActions.saveData,
+    settingActions.saveData,
     saveUserToken,
   )
 }
