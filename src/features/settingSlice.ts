@@ -1,43 +1,65 @@
 import { createSelector,createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { FetchStatusCode } from '@/api'
+import { PathData } from '@/domain/pullRequest'
 import { STORAGE_KEY,storageUtil } from '@/utils/storage'
 
 import { RootState } from '.'
 
-interface PathData {
-  value: string
+interface ResponseData<T> {
+  value: T
   fetchState: FetchStatusCode
 }
 interface SettingInfoState {
-  token: string
-  path: PathData
+  token: ResponseData<string>
+  path: ResponseData<PathData>
 }
 
-// TODO: init할때 띄워야되네..
-const tokenFromStorage =
-  storageUtil.getData<string>(
-    STORAGE_KEY.GITHUB_TOKEN,
-  )
-
 const initialState: SettingInfoState = {
-  token: tokenFromStorage || '',
-  path: {
+  token: {
     value: '',
+    fetchState: FetchStatusCode.LOADING,
+  },
+  path: {
+    value: {
+      orgName: '',
+      repository: '',
+      prNumber: '',
+    },
     fetchState: FetchStatusCode.LOADING,
   },
 }
 
 const reducers = {
-  // TODO: Refactor, payload를 state로 관리하지 않아도 될듯.
-  saveData: (state: SettingInfoState, { payload }: PayloadAction<string>) => {
-    state.token = payload
+  requestSyncToken: (state: SettingInfoState) => {
+    state.token.fetchState = FetchStatusCode.LOADING
+  },
+  requestSyncTokenSuccess: (
+    state: SettingInfoState,
+    { payload }: PayloadAction<ResponseData<string>>,
+  ) => {
+    state.token.value = payload.value
+    state.token.fetchState = payload.fetchState
+  },
+  requestSyncTokenFail: (state: SettingInfoState) => {
+    state.token.fetchState = FetchStatusCode.UNKNOWN
+  },
+  saveToken: (state: SettingInfoState, { payload }: PayloadAction<string>) => {
+    state.token.value = payload
   },
   requestPath: (state: SettingInfoState) => {
     state.path.fetchState = FetchStatusCode.LOADING
   },
-  setPath: (state: SettingInfoState, { payload }: PayloadAction<PathData>) => {
-    state.path = payload
+  setPathSuccess: (
+    state: SettingInfoState,
+    { payload }: PayloadAction<ResponseData<PathData>>,
+  ) => {
+    state.path.value = payload.value
+    state.path.fetchState = payload.fetchState
+  },
+  setPathFail: (state: SettingInfoState, { payload }: PayloadAction<FetchStatusCode>) => {
+    state.path.value = initialState.path.value
+    state.path.fetchState = payload
   },
 }
 
@@ -49,11 +71,15 @@ const slice = createSlice({
 })
 const settingState = (state: RootState) => state[USER_INFO]
 const getToken = (state: SettingInfoState) => state.token
-const getPath = (state: SettingInfoState) => state.path
+const getIsPullRequestPath = (state: SettingInfoState) => (
+  state.path.fetchState === FetchStatusCode.OK
+)
+const getPathValue = (state: SettingInfoState) => state.path.value
 
 export const settingSelector = {
   token: createSelector([settingState], getToken),
-  path: createSelector([settingState], getPath),
+  path: createSelector([settingState], getPathValue),
+  isPullRequestPath: createSelector([settingState], getIsPullRequestPath),
 }
 
 export const USER_INFO = sliceName

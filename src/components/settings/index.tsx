@@ -40,7 +40,7 @@ export const SettingsView = () => {
   const [token, setToken] = useState('')
 
   const saveToken = () => {
-    dispatch(settingActions.saveData(token))
+    dispatch(settingActions.saveToken(token))
   }
 
   return (
