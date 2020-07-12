@@ -13,7 +13,8 @@ function* fetchPullRequestFiles() {
     const { orgName, repository, prNumber } = yield select(
       settingSelector.path,
     )
-    const token = yield select(settingSelector.token)
+    const {value: token} = yield select(settingSelector.token)
+
     let page = 1
     let result: PullRequestData[] = []
 
