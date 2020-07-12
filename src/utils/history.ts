@@ -10,7 +10,7 @@ export function redirect(targetUrl: string) {
 }
 
 export const currentPath = () => new Promise<string>((resolve, _) => {
-  chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+  chrome.tabs.query({active: true, currentWindow: true}, tabs => {
     resolve(tabs[0].url)
   })
 })
