@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router'
 
+import { Footer } from '@/components/shared/Footer'
 import { settingActions, settingSelector } from '@/features/settingSlice'
 
 export const HomeView = () => {
@@ -20,6 +21,9 @@ export const HomeView = () => {
   }
 
   return (
-    <div>Go To PullRequest Page~</div>
+    <>
+      <div>Go To PullRequest Page~</div>
+      <Footer />
+    </>
   )
 }
