@@ -8,3 +8,9 @@ export function push(targetUrl: string) {
 export function redirect(targetUrl: string) {
   history.replace(targetUrl)
 }
+
+export const currentPath = () => new Promise<string>((resolve, _) => {
+  chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+    resolve(tabs[0].url)
+  })
+})
