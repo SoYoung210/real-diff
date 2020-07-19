@@ -5,6 +5,7 @@ import { PullRequestData } from '@/domain/pullRequest'
 import { settingSelector } from '@/features/settingSlice'
 import { redirect } from '@/utils/history'
 import { filterIgnoredFiles } from '@/utils/ignoredFileFilter'
+import { STORAGE_KEY,storageUtil } from '@/utils/storage'
 
 import { prActions } from './prSlice'
 
@@ -13,8 +14,11 @@ function* fetchPullRequestFiles() {
     const { orgName, repository, prNumber } = yield select(
       settingSelector.path,
     )
-    const {value: token} = yield select(settingSelector.token)
-
+    const token = yield call(
+      storageUtil.getData,
+      STORAGE_KEY.GITHUB_TOKEN,
+    )
+    console.log('@@ token', token)
     let page = 1
     let result: PullRequestData[] = []
 
@@ -74,6 +78,7 @@ function* fetchPullRequestFiles() {
 
     yield put(prActions.setRealDiff(realDiff))
   } catch(error) {
+    console.log('@@@ error !!!!',error)
     yield call(redirect, '/settings')
   }
 }

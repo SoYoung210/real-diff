@@ -56,25 +56,3 @@ export function* watchRequestPath() {
     getCurrentPath,
   )
 }
-
-function* syncToken() {
-  const tokenData = yield call(storageUtil.getData(STORAGE_KEY.GITHUB_TOKEN))
-  console.log('@@ tokenData', tokenData)
-  if (tokenData === null ) {
-    yield put(settingActions.requestSyncTokenFail())
-
-    return
-  }
-
-  yield put(settingActions.requestSyncTokenSuccess({
-    value: tokenData,
-    fetchState: FetchStatusCode.OK,
-  }))
-}
-
-export function* watchSyncToken() {
-  yield takeLatest(
-    settingActions.requestSyncToken,
-    syncToken,
-  )
-}
