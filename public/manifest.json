@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "version": "0.0.1",
-  "name": "pr-lockulator",
-  "description": "Calculate lock file diff in Pull Request",
+  "name": "Real Diff",
+  "description": "Calculate Pull Request Real Diff",
   "browser_action": {
     "default_icon": "icon/icon_16x16.png",
     "default_popup": "index.html"
@@ -12,12 +12,19 @@
     "48": "icon/icon_64x64.png",
     "128": "icon/icon_128x128.png"
   },
-  "homepage_url": "https://github.com/SoYoung210/pr-lockulator",
-  "content_scripts": [
-    {
-      "matches": ["https://github.com/*/*/pull/*/files"],
-      "run_at": "document_end",
-      "js": ["js/vendor.js", "js/main.js"]
+  "permissions": ["tabs", "activeTab", "storage"],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+Shift+K",
+        "linux": "Alt+Shift+K",
+        "chromeos": "Alt+Shift+K",
+        "mac": "Command+Shift+K",
+        "default": "Ctrl+Shift+K"
+      },
+      "description": "open_popup"
     }
-  ]
+  },
+  "content_security_policy":
+    "script-src 'self' 'sha256-VCSQgQD+u6aI1GbN9qMh4VqJYnazKlasWFYPQspyPJI='; object-src 'self'"
 }
