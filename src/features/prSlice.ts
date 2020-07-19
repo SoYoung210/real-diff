@@ -27,7 +27,7 @@ const initialState: PullRequestFilesState = {
 }
 
 const reducers = {
-  fetch: (state: PullRequestFilesState, { payload }: PayloadAction<string>) => {
+  fetch: (state: PullRequestFilesState) => {
     state.fetchState = FetchStatusCode.LOADING
   },
   success: (state: PullRequestFilesState, { payload }: PayloadAction<PullRequestFilesData[]>) => {

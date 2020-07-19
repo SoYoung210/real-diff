@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { userInfoActions } from '@/features/settingSlice'
+import { settingActions } from '@/features/settingSlice'
 
 const Layout = styled.div`
   margin: 10px;
@@ -40,7 +40,7 @@ export const SettingsView = () => {
   const [token, setToken] = useState('')
 
   const saveToken = () => {
-    dispatch(userInfoActions.saveData(token))
+    dispatch(settingActions.saveToken(token))
   }
 
   return (

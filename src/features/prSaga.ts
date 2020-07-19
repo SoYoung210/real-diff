@@ -1,32 +1,19 @@
-import { PayloadAction } from '@reduxjs/toolkit'
 import { call,put,select, takeLatest } from 'redux-saga/effects'
 
 import { pullRequestAPI } from '@/api'
 import { PullRequestData } from '@/domain/pullRequest'
-import { tokenSelector } from '@/features/settingSlice'
+import { settingSelector } from '@/features/settingSlice'
 import { redirect } from '@/utils/history'
 import { filterIgnoredFiles } from '@/utils/ignoredFileFilter'
 
 import { prActions } from './prSlice'
 
-function* fetchPullRequestFiles({payload}: PayloadAction<string>) {
-  // ['', 'SoYoung210', 'real-diff', 'pull', '1']
+function* fetchPullRequestFiles() {
   try {
-    const pathName = payload.split('/')
-    // TODO: Refactor
-    // const parsedPathName = {
-    //   orgName: pathName[1],
-    //   repository: pathName[2],
-    //   prNumber: pathName[4],
-    // }
-    // FIXME: Test 환경 값에 따라 목데이터 분리하기
-    const parsedPathName = {
-      orgName: 'SoYoung210',
-      repository: 'real-diff',
-      prNumber: 1,
-    }
-    const { orgName, repository, prNumber } = parsedPathName
-    const token = yield select(tokenSelector.token)
+    const { orgName, repository, prNumber } = yield select(
+      settingSelector.path,
+    )
+    const {value: token} = yield select(settingSelector.token)
 
     let page = 1
     let result: PullRequestData[] = []
