@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "name": "Real Diff",
   "description": "Calculate Pull Request Real Diff",
   "browser_action": {
@@ -25,6 +25,5 @@
       "description": "open_popup"
     }
   },
-  "content_security_policy":
-    "script-src 'self' 'sha256-VCSQgQD+u6aI1GbN9qMh4VqJYnazKlasWFYPQspyPJI='; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'sha256-VCSQgQD+u6aI1GbN9qMh4VqJYnazKlasWFYPQspyPJI='; object-src 'self'"
 }
