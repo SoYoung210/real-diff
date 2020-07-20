@@ -18,7 +18,7 @@ function* fetchPullRequestFiles() {
       storageUtil.getData,
       STORAGE_KEY.GITHUB_TOKEN,
     )
-    console.log('@@ token', token)
+
     let page = 1
     let result: PullRequestData[] = []
 
@@ -47,7 +47,6 @@ function* fetchPullRequestFiles() {
       totalAdditions: 0,
       totalDeletions:0,
     })
-    console.log('@@ Data', result)
 
     const filterFiles = filterIgnoredFiles([
       'package-lock.json',
@@ -72,9 +71,6 @@ function* fetchPullRequestFiles() {
       additions: totalAdditions - ignoredAdditions,
       deletions: totalDeletions - ignoredDeletions,
     }
-    console.log('@@ totalChangedLines', totalAdditions)
-    console.log('@@ ignoredList', ignoredAdditions)
-    console.log('@@ result', realDiff)
 
     yield put(prActions.setRealDiff(realDiff))
   } catch(error) {
