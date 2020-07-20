@@ -12,7 +12,6 @@ export const HomeView = () => {
 
   useEffect(() => {
     dispatch(settingActions.requestPath())
-    dispatch(settingActions.requestSyncToken())
   }, [dispatch])
 
 
