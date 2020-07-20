@@ -70,7 +70,7 @@
     "signale": "^1.4.0",
     "ts-loader": "^6.2.1",
     "typescript": "~3.8.3 ",
-    "webpack": "~4.42.0",
+    "webpack": "4.42.0",
     "webpack-cli": "~3.3.11",
     "webpack-merge": "~4.2.2"
   }
