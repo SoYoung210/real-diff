@@ -2,7 +2,9 @@
 
 [![extension-version](https://badgen.net/chrome-web-store/v/noolkogacjfdckeeclgddpabknbnjacd)](https://chrome.google.com/webstore/detail/octodirect/noolkogacjfdckeeclgddpabknbnjacd?hl=ko) [![price](https://badgen.net/chrome-web-store/price/noolkogacjfdckeeclgddpabknbnjacd)](https://chrome.google.com/webstore/detail/octodirect/noolkogacjfdckeeclgddpabknbnjacd?hl=ko) [![star_of_extension](https://badgen.net/chrome-web-store/stars/noolkogacjfdckeeclgddpabknbnjacd)](https://chrome.google.com/webstore/detail/octodirect/noolkogacjfdckeeclgddpabknbnjacd?hl=ko)
 
-Chrome Extension for Calculate Pull Request's Real Diff(Except lockfile ..etc)
+**Chrome Extension for Calculate Pull Request's Real Diff.**
+
+Currently, changes to `package-lock.json` and `yarn.lock` are excluded from Pull Request file changes.
 
 ## Install
 
@@ -18,7 +20,7 @@ Chrome Extension > [Link](https://chrome.google.com/webstore/detail/octodirect/n
 | :------------------------------: | :----------------------------: |
 | ![main page](assets/setting_page_1.png) | ![setting page](assets/setting_page_2.png) |
 
-1. Go back to main page
+3. Go back to main page
 
 ## Reference Repository
 
