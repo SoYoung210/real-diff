@@ -1,5 +1,6 @@
 export enum STORAGE_KEY {
   GITHUB_TOKEN = '@@REAL_DIFF/GITHUB_TOKEN',
+  IGNORE_FILE_LIST = '@@REAL_DIFF/IGNORE_FILE_LIST',
 }
 
 const saveData = <T>(key: STORAGE_KEY, value: T) => new Promise<void>((resolve) => {
