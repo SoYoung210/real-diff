@@ -74,9 +74,13 @@ const getIsPullRequestPath = (state: SettingInfoState) => (
   state.path.fetchState === FetchStatusCode.OK
 )
 const getPathValue = (state: SettingInfoState) => state.path.value
+const getIgnoreFileList = (state: SettingInfoState) => {
+  return state.ignoreFileList.value
+}
 
 export const settingSelector = {
   path: createSelector([settingState], getPathValue),
+  ignoreFileList: createSelector([settingState], getIgnoreFileList),
   isPullRequestPath: createSelector([settingState], getIsPullRequestPath),
 }
 
