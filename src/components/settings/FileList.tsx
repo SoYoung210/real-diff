@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
-import React, { KeyboardEvent,useEffect,useState } from 'react'
+import React, { KeyboardEvent, useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 
 import { IgnoredFile } from '@/domain/ignoreFile'
-import { settingSelector } from '@/features/settingSlice'
+import { settingActions,settingSelector } from '@/features/settingSlice'
 
 const InputWrapper = styled.div`
   display: flex;
@@ -41,7 +41,10 @@ export const FileListSettingView = () => {
   }
   const addIgnoreFileName = () => {
     setFileNameToBeAdded('')
-    // TODO: Add add file name dispatch event
+    dispatch(settingActions.addIgnoreFile({
+      fileName: fileNameToBeAdded,
+      ignore: true,
+    }))
   }
 
   return (
