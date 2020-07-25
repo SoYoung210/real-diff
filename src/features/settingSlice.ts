@@ -1,6 +1,7 @@
 import { createSelector,createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { FetchStatusCode } from '@/api'
+import { IgnoredFile } from '@/domain/ignoreFile'
 import { PathData } from '@/domain/pullRequest'
 
 import { RootState } from '.'
@@ -11,6 +12,7 @@ interface ResponseData<T> {
 }
 interface SettingInfoState {
   path: ResponseData<PathData>
+  ignoreFileList: ResponseData<IgnoredFile[]>
 }
 
 const initialState: SettingInfoState = {
@@ -22,11 +24,18 @@ const initialState: SettingInfoState = {
     },
     fetchState: FetchStatusCode.LOADING,
   },
+  ignoreFileList: {
+    value: [
+      {ignore: true, fileName: 'package-lock.json'},
+      {ignore: true, fileName: 'yarn.lock'},
+    ],
+    fetchState: FetchStatusCode.LOADING,
+  },
 }
 
 const reducers = {
   saveToken: (state: SettingInfoState, { payload }: PayloadAction<string>) => {
-    // state.token.value = payload
+    // empty action
   },
   requestPath: (state: SettingInfoState) => {
     state.path.fetchState = FetchStatusCode.LOADING
@@ -41,6 +50,16 @@ const reducers = {
   setPathFail: (state: SettingInfoState, { payload }: PayloadAction<FetchStatusCode>) => {
     state.path.value = initialState.path.value
     state.path.fetchState = payload
+  },
+  requestIgnoreFileList: (state: SettingInfoState) => {
+    state.ignoreFileList.fetchState = FetchStatusCode.LOADING
+  },
+  setIgnoreFileListSuccess: (state: SettingInfoState, { payload }: PayloadAction<IgnoredFile[]>) => {
+    state.ignoreFileList.value = payload
+  },
+  setIgnoreFileListFail: (state: SettingInfoState, { payload }: PayloadAction<FetchStatusCode>) => {
+    state.ignoreFileList.value = initialState.ignoreFileList.value
+    state.ignoreFileList.fetchState = payload
   },
 }
 
