@@ -2,6 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit'
 import { call,put,select,takeLatest } from 'redux-saga/effects'
 
 import { FetchStatusCode } from '@/api'
+import { IgnoredFile } from '@/domain/ignoreFile'
 import { PULL_REQUEST_REGEX } from '@/domain/pullRequest'
 import { currentPath,redirect } from '@/utils/history'
 import { STORAGE_KEY,storageUtil } from '@/utils/storage'
@@ -90,5 +91,23 @@ export function* watchSyncIgnoreFileList() {
   yield takeLatest(
     settingActions.syncIgnoreFileList,
     syncIgnoreFileFromStorage,
+  )
+}
+
+function* addIgnoreFileToStorage({payload}: PayloadAction<IgnoredFile>) {
+  const existFileList: IgnoredFile[] = yield select(
+    settingSelector.ignoreFileList,
+  )
+  yield call(
+    storageUtil.saveData,
+    STORAGE_KEY.IGNORE_FILE_LIST,
+    existFileList.concat(payload),
+  )
+}
+
+export function* watchAddIgnoreFile() {
+  yield takeLatest(
+    settingActions.addIgnoreFile,
+    addIgnoreFileToStorage,
   )
 }

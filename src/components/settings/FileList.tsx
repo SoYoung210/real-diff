@@ -34,11 +34,6 @@ export const FileListSettingView = () => {
   )
   const [fileNameToBeAdded, setFileNameToBeAdded] = useState('')
 
-  useEffect(() => {
-    return () => {
-      //dispatch()
-    }
-  }, [])
   const onKeyPressed = ({key}: KeyboardEvent<HTMLInputElement>) => {
     if (key === 'Enter') {
       addIgnoreFileName()
