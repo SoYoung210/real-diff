@@ -4,7 +4,6 @@ import { call,put,select,takeLatest } from 'redux-saga/effects'
 import { FetchStatusCode } from '@/api'
 import { PULL_REQUEST_REGEX } from '@/domain/pullRequest'
 import { currentPath,redirect } from '@/utils/history'
-import { isEmpty } from '@/utils/iter'
 import { STORAGE_KEY,storageUtil } from '@/utils/storage'
 import { isMatchedPattern } from '@/utils/validation'
 
@@ -59,15 +58,18 @@ export function* watchRequestPath() {
 }
 
 function* syncIgnoreFileFromStorage() {
+  console.log('Saga called')
   const initialFileList = yield select(
     settingSelector.ignoreFileList,
   )
+  console.log('@@ initialFileList', initialFileList)
   const storedIgnoreList = yield call(
     storageUtil.getData,
     STORAGE_KEY.IGNORE_FILE_LIST,
   )
-
-  if (isEmpty(storedIgnoreList)) {
+  console.log('@@ storedIgnoreList', storedIgnoreList)
+  if (!storedIgnoreList) {
+    console.log('@@ isEmpty')
     yield call(
       storageUtil.saveData,
       STORAGE_KEY.IGNORE_FILE_LIST,
@@ -78,7 +80,9 @@ function* syncIgnoreFileFromStorage() {
   }
 
   yield put(
-    settingActions.setIgnoreFileListSuccess(storedIgnoreList),
+    settingActions.setIgnoreFileListSuccess(
+      storedIgnoreList,
+    ),
   )
 }
 
