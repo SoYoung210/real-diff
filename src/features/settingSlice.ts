@@ -51,7 +51,7 @@ const reducers = {
     state.path.value = initialState.path.value
     state.path.fetchState = payload
   },
-  requestIgnoreFileList: (state: SettingInfoState) => {
+  syncIgnoreFileList: (state: SettingInfoState) => {
     state.ignoreFileList.fetchState = FetchStatusCode.LOADING
   },
   setIgnoreFileListSuccess: (state: SettingInfoState, { payload }: PayloadAction<IgnoredFile[]>) => {
