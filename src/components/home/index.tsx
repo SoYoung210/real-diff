@@ -10,6 +10,7 @@ export const HomeView = () => {
   const isPullRequestPath =
     useSelector(settingSelector.isPullRequestPath)
 
+  // FIXME: this component called twice
   useEffect(() => {
     dispatch(settingActions.requestPath())
     dispatch(settingActions.syncIgnoreFileList())
