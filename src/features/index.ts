@@ -5,7 +5,7 @@ import { all } from 'redux-saga/effects'
 
 import { watchFetchPullRequest } from './prSaga'
 import { PR_SLICE,prReducer } from './prSlice'
-import { watchRequestPath,watchSaveUserToken } from './settingSaga'
+import { watchRequestPath,watchSaveUserToken, watchSyncIgnoreFileList } from './settingSaga'
 import { settingReducer,USER_INFO } from './settingSlice'
 
 const rootReducer = combineReducers({
@@ -19,6 +19,7 @@ export function* rootSaga() {
     watchSaveUserToken(),
     watchFetchPullRequest(),
     watchRequestPath(),
+    watchSyncIgnoreFileList(),
   ])
 }
 

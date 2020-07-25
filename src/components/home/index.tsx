@@ -12,6 +12,7 @@ export const HomeView = () => {
 
   useEffect(() => {
     dispatch(settingActions.requestPath())
+    dispatch(settingActions.syncIgnoreFileList())
   }, [dispatch])
 
 
