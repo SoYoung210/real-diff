@@ -1,6 +1,7 @@
 import { call,put,select, takeLatest } from 'redux-saga/effects'
 
 import { pullRequestAPI } from '@/api'
+import { IgnoredFile } from '@/domain/ignoreFile'
 import { PullRequestData } from '@/domain/pullRequest'
 import { settingSelector } from '@/features/settingSlice'
 import { redirect } from '@/utils/history'
@@ -47,12 +48,11 @@ function* fetchPullRequestFiles() {
       totalAdditions: 0,
       totalDeletions:0,
     })
+    const ignoreFileList: IgnoredFile[] = yield select(
+      settingSelector.ignoreFileList,
+    )
 
-    const filterFiles = filterIgnoredFiles([
-      'package-lock.json',
-      'yarn.lock',
-    ])
-
+    const filterFiles = filterIgnoredFiles(ignoreFileList.map(file => file.fileName))
     const {
       ignoredAdditions,
       ignoredDeletions,

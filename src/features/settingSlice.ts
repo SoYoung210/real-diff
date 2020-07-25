@@ -62,7 +62,7 @@ const reducers = {
     state.ignoreFileList.fetchState = payload
   },
   addIgnoreFile: (state: SettingInfoState, { payload }: PayloadAction<IgnoredFile>) => {
-    // empty action
+    state.ignoreFileList.value.push(payload)
   },
 }
 

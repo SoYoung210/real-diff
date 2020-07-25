@@ -5,7 +5,9 @@ const getLastItem = <T>(arr: T[]) => {
 const getFileName = (fileNameWithPath: string) => {
   return getLastItem(fileNameWithPath.split('/'))
 }
-
+/*
+['package-lock.json', 'yarn.lock', '.gitignore']
+*/
 export const filterIgnoredFiles = (ignoredList: string[]) => (
   filename: string,
 ) => {
