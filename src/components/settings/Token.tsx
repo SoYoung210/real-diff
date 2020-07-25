@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import { settingActions } from '@/features/settingSlice'
 
@@ -16,9 +15,6 @@ const Header = styled.header`
 const Head = styled.h1`
   font-weight: 700;
   margin: 10px 0;
-`
-const CloseButton = styled(Link)`
-  color: gray;
 `
 const TextInputField = styled.input`
   display: block;
@@ -48,7 +44,6 @@ export const TokenSettingView = () => {
     <Layout>
       <Header>
         <Head>Add GitHub API Token</Head>
-        <CloseButton to='/'>X</CloseButton>
       </Header>
       <TextInputField
         value={token}

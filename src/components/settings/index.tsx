@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import { NavLink,Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Link,NavLink,Route, Switch, useRouteMatch } from 'react-router-dom'
 
 import { SETTING_ROUTE_TYPE } from '@/constants/routes'
 
@@ -18,11 +18,13 @@ const StickyNav = styled.header`
   justify-content: space-around;
 `
 
-// https://docs.github.com/en/rest/reference/pulls#list-pull-requests-files
+const CloseButton = styled(Link)`
+  color: gray;
+`
+
 export const SettingsView = () => {
   const match = useRouteMatch()
 
-//'/settings/file-list'
   return (
     <>
       <StickyNav>
@@ -38,15 +40,16 @@ export const SettingsView = () => {
         >
           Token
         </StyledNavLink >
+        <CloseButton to='/'>X</CloseButton>
       </StickyNav>
       <Switch>
         <Route
           path={`${match.url}/${SETTING_ROUTE_TYPE.FILE_LIST}`}
-          component={TokenSettingView}
+          component={FileListSettingView}
         />
         <Route
           path={`${match.url}/${SETTING_ROUTE_TYPE.TOKEN}`}
-          component={FileListSettingView}
+          component={TokenSettingView}
         />
       </Switch>
     </>
