@@ -3,7 +3,7 @@ import React from 'react'
 import { NavLink,Route, Switch } from 'react-router-dom'
 
 import { FileListSettingView } from './FileList'
-import { TokenSettingsView } from './Token'
+import { TokenSettingView } from './Token'
 
 const StyledNavLink = styled(NavLink)`
   &.active {
@@ -29,7 +29,7 @@ export const SettingsView = () => {
         </StyledNavLink >
       </StickyNav>
       <Switch>
-        <Route path='/settings/token' component={TokenSettingsView} />
+        <Route path='/settings/token' component={TokenSettingView} />
         <Route path='/settings/file-list' component={FileListSettingView} />
       </Switch>
     </>

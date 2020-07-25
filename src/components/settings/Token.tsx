@@ -35,7 +35,7 @@ const SaveButton = styled.button`
   font-size: 14px;
 `
 // https://docs.github.com/en/rest/reference/pulls#list-pull-requests-files
-export const TokenSettingsView = () => {
+export const TokenSettingView = () => {
   const dispatch = useDispatch()
   const [token, setToken] = useState('')
 
