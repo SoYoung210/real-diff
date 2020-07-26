@@ -24,7 +24,7 @@ const renderFileList = (
   onClickDelete: Function,
 ) => ({fileName}: IgnoredFile) => (
   <li key={fileName}>
-    <span onClick={ () => onClickDelete(fileName)}>X {' '}</span>
+    <button onClick={ () => onClickDelete(fileName)}>X {' '}</button>
     <span>{fileName}</span>
   </li>
 )
