@@ -10,6 +10,8 @@ import { SettingsView } from '@/components/settings/index'
 import store, { rootSaga,sagaMiddleware } from '@/features'
 import { history} from '@/utils/history'
 
+import { ROUTE } from './constants/routes'
+
 sagaMiddleware.run(rootSaga)
 
 const Layout = styled.div`
@@ -22,9 +24,9 @@ ReactDOM.render(
     <Layout>
       <Router history={history}>
         <Switch>
-          <Route path='/settings' component={SettingsView} />
-          <Route path='/main' component={MainView} />
-          <Route path='/' component={HomeView} />
+          <Route path={ROUTE.SETTINGS} component={SettingsView} />
+          <Route path={ROUTE.MAIN} component={MainView} />
+          <Route path={ROUTE.HOME} component={HomeView} />
         </Switch>
       </Router>
     </Layout>

@@ -1,13 +1,14 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { call,put,takeLatest } from 'redux-saga/effects'
+import { call,put,select,takeLatest } from 'redux-saga/effects'
 
 import { FetchStatusCode } from '@/api'
+import { IgnoredFile } from '@/domain/ignoreFile'
 import { PULL_REQUEST_REGEX } from '@/domain/pullRequest'
 import { currentPath,redirect } from '@/utils/history'
 import { STORAGE_KEY,storageUtil } from '@/utils/storage'
 import { isMatchedPattern } from '@/utils/validation'
 
-import { settingActions } from './settingSlice'
+import { settingActions, settingSelector } from './settingSlice'
 
 function* saveUserToken({payload}: PayloadAction<string>) {
   yield call(
@@ -54,5 +55,77 @@ export function* watchRequestPath() {
   yield takeLatest(
     settingActions.requestPath,
     getCurrentPath,
+  )
+}
+
+function* syncIgnoreFileFromStorage() {
+  const initialFileList = yield select(
+    settingSelector.ignoreFileList,
+  )
+  const storedIgnoreList = yield call(
+    storageUtil.getData,
+    STORAGE_KEY.IGNORE_FILE_LIST,
+  )
+  if (!storedIgnoreList) {
+    yield call(
+      storageUtil.saveData,
+      STORAGE_KEY.IGNORE_FILE_LIST,
+      initialFileList,
+    )
+
+    return
+  }
+
+  yield put(
+    settingActions.setIgnoreFileListSuccess(
+      storedIgnoreList,
+    ),
+  )
+}
+
+export function* watchSyncIgnoreFileList() {
+  yield takeLatest(
+    settingActions.syncIgnoreFileList,
+    syncIgnoreFileFromStorage,
+  )
+}
+
+function* addIgnoreFileToStorage({payload}: PayloadAction<IgnoredFile>) {
+  const existFileList: IgnoredFile[] = yield select(
+    settingSelector.ignoreFileList,
+  )
+  yield call(
+    storageUtil.saveData,
+    STORAGE_KEY.IGNORE_FILE_LIST,
+    existFileList.concat(payload),
+  )
+}
+
+export function* watchAddIgnoreFile() {
+  yield takeLatest(
+    settingActions.addIgnoreFile,
+    addIgnoreFileToStorage,
+  )
+}
+
+function* removeIgnoreFileFromStorage({payload}: PayloadAction<string>) {
+  const currentFileList: IgnoredFile[] = yield select(settingSelector.ignoreFileList)
+  const updatedFileList = currentFileList.filter(
+    ({fileName}) => fileName !== payload,
+  )
+
+  yield call(
+    storageUtil.saveData,
+    STORAGE_KEY.IGNORE_FILE_LIST,
+    updatedFileList,
+  )
+
+  yield put(settingActions.setIgnoreFileListSuccess(updatedFileList))
+}
+
+export function* watchRemoveIgnoreFile() {
+  yield takeLatest(
+    settingActions.removeIgnoreFile,
+    removeIgnoreFileFromStorage,
   )
 }
