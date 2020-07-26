@@ -115,8 +115,9 @@ export function* watchAddIgnoreFile() {
 function* removeIgnoreFileFromStorage({payload}: PayloadAction<string>) {
   const currentFileList: IgnoredFile[] = yield select(settingSelector.ignoreFileList)
 
-  const idx = currentFileList.findIndex(file => file.fileName === payload)
-  const updatedFileList = currentFileList.splice(idx, 1)
+  const updatedFileList = currentFileList.filter(
+    ({fileName}) => fileName === payload,
+  )
 
   yield call(
     storageUtil.saveData,
