@@ -20,11 +20,13 @@ const AddButton = styled.button`
 `
 
 // TODO: 폴더를 나눌지 그냥 여기서 다 쓸지 고민해서 정하기.
-const renderFileList = (fileList: IgnoredFile[]) => (
-  fileList.map(
-    ({fileName, ignore}) => (
-      <li key={fileName}>{fileName}</li>
-    ))
+const renderFileList = (
+  onClickDelete: Function,
+) => ({fileName}: IgnoredFile) => (
+  <li key={fileName}>
+    <span onClick={ () => onClickDelete(fileName)}>X {' '}</span>
+    <span>{fileName}</span>
+  </li>
 )
 
 export const FileListSettingView = () => {
@@ -39,6 +41,11 @@ export const FileListSettingView = () => {
       addIgnoreFileName()
     }
   }
+
+  const removeItem = (fileName: string) => {
+    dispatch(settingActions.removeIgnoreFile(fileName))
+  }
+
   const addIgnoreFileName = () => {
     setFileNameToBeAdded('')
     dispatch(settingActions.addIgnoreFile({
@@ -50,7 +57,11 @@ export const FileListSettingView = () => {
   return (
     <>
       <div>FileListSettingView</div>
-      <ol>{renderFileList(ignoreFileList)}</ol>
+      <ol>
+        {
+          ignoreFileList.map(renderFileList(removeItem))
+        }
+      </ol>
       <InputWrapper>
         <input
           value={fileNameToBeAdded}

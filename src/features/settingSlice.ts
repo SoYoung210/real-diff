@@ -64,6 +64,9 @@ const reducers = {
   addIgnoreFile: (state: SettingInfoState, { payload }: PayloadAction<IgnoredFile>) => {
     state.ignoreFileList.value.push(payload)
   },
+  removeIgnoreFile: (state: SettingInfoState, { payload }: PayloadAction<string>) => {
+    // empty action
+  },
 }
 
 const sliceName = 'userInfo'
