@@ -1,6 +1,7 @@
 import { call,put,select, takeLatest } from 'redux-saga/effects'
 
 import { pullRequestAPI } from '@/api'
+import { ROUTE, SETTING_ROUTE_TYPE } from '@/constants/routes'
 import { IgnoredFile } from '@/domain/ignoreFile'
 import { PullRequestData } from '@/domain/pullRequest'
 import { settingSelector } from '@/features/settingSlice'
@@ -75,7 +76,7 @@ function* fetchPullRequestFiles() {
     yield put(prActions.setRealDiff(realDiff))
   } catch(error) {
     console.log('@@@ error !!!!',error)
-    yield call(redirect, '/settings')
+    yield call(redirect, `/${ROUTE.SETTINGS}/${SETTING_ROUTE_TYPE.TOKEN}`)
   }
 }
 
