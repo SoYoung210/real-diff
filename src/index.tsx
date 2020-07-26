@@ -16,7 +16,8 @@ sagaMiddleware.run(rootSaga)
 
 const Layout = styled.div`
   margin: 10px;
-  width: 280px;
+  width: 320px;
+  height: 240px;
 `
 
 ReactDOM.render(
