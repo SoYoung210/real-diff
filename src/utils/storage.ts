@@ -8,8 +8,8 @@ const saveData = <T>(key: STORAGE_KEY, value: T) => new Promise<void>((resolve) 
     return resolve(console.log('🚀 Storage Updated!'))
   })
 })
-// FIXME: type
-const getData = <T>(key: STORAGE_KEY): any => new Promise<any>((resolve) => {
+
+const getData = <T>(key: STORAGE_KEY): Promise<T> => new Promise<T>((resolve) => {
   chrome.storage.sync.get(key, function (items) {
 
     return resolve(items[key])
