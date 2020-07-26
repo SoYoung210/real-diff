@@ -59,18 +59,14 @@ export function* watchRequestPath() {
 }
 
 function* syncIgnoreFileFromStorage() {
-  console.log('Saga called')
   const initialFileList = yield select(
     settingSelector.ignoreFileList,
   )
-  console.log('@@ initialFileList', initialFileList)
   const storedIgnoreList = yield call(
     storageUtil.getData,
     STORAGE_KEY.IGNORE_FILE_LIST,
   )
-  console.log('@@ storedIgnoreList', storedIgnoreList)
   if (!storedIgnoreList) {
-    console.log('@@ isEmpty')
     yield call(
       storageUtil.saveData,
       STORAGE_KEY.IGNORE_FILE_LIST,
