@@ -39,8 +39,8 @@
     "lint": "eslint --project ./tsconfig.json 'src/**/*.{ts,tsx}' --exclude \"**/__tests__/**\"",
     "test": "craco test",
     "test:watch": "craco test",
-    "_clean:zip": "rm -rf octodirect.zip",
-    "_zipify": "zip -r octodirect.zip build",
+    "_clean:zip": "rm -rf real-diff.zip",
+    "_zipify": "zip -r real-diff.zip build",
     "_versioning": "node ./scripts/deploy.js",
     "_eject": "react-scripts eject"
   },
