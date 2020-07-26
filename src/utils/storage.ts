@@ -5,7 +5,7 @@ export enum STORAGE_KEY {
 
 const saveData = <T>(key: STORAGE_KEY, value: T) => new Promise<void>((resolve) => {
   chrome.storage.sync.set({[key]: value}, function () {
-    return resolve(console.log('🚀 Token Saved!'))
+    return resolve(console.log('🚀 Storage Updated!'))
   })
 })
 // FIXME: type
