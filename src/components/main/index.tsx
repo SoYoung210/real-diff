@@ -34,12 +34,12 @@ export const MainView = () => {
   const dispatch = useDispatch()
   const realDiff = useSelector(prSelector.realDiff)
   useEffect(() => {
-    dispatch(prActions.fetch())
+    // dispatch(prActions.fetch())
   },[dispatch])
 
   return (
     <>
-      <MainHeader title='Show Real Diff' highlightIndex={[6, 10]}/>
+      <MainHeader title='Show Real Diff' highlightIndex={[5, 10]}/>
       <ContentWrapper>
         <ContentContainer>
           <DiffText color='#00A661'>+{realDiff.additions}</DiffText>
