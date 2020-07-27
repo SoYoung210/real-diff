@@ -2,34 +2,30 @@ import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
+import { Input } from '@/components/shared/Input'
 import { settingActions } from '@/features/settingSlice'
 
-const Layout = styled.div`
-  margin: 10px;
-  width: 280px;
+const InputContainer = styled.div`
+  display: flex;
+  padding: 12px 0;
+
+  & > input + button {
+    margin-left: 6px;
+  }
+
+  & > input {
+    flex: 1;
+  }
 `
 
-const Header = styled.header`
-  display: flex;
-`
-const Head = styled.h1`
-  font-weight: 700;
-  margin: 10px 0;
-`
-const TextInputField = styled.input`
-  display: block;
-  width: 100%;
-`
 // TODO: Refactor to shared button
 const SaveButton = styled.button`
-  padding: 8px 0px;
-  margin-top: 10px;
-  width: 100%;
-  background: rgba(24,205,140,0.1);
+  padding: 6px 0px;
+  background: #5AE9AD;
+  color: #ffffff;
   border-radius: 8px;
-  color: #18CD8C;
-  font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
+  min-width: 82px;
 `
 // https://docs.github.com/en/rest/reference/pulls#list-pull-requests-files
 export const TokenSettingView = () => {
@@ -41,17 +37,17 @@ export const TokenSettingView = () => {
   }
 
   return (
-    <Layout>
-      <Header>
-        <Head>Add GitHub API Token</Head>
-      </Header>
-      <TextInputField
-        value={token}
-        onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
-          setToken(target.value)
-        }
-      />
-      <SaveButton onClick={saveToken}>Save</SaveButton>
-    </Layout>
+    <>
+      <InputContainer>
+        <Input
+          value={token}
+          placeholder='Input Your GitHub Token'
+          onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
+            setToken(target.value)
+          }
+        />
+        <SaveButton onClick={saveToken}>Add</SaveButton>
+      </InputContainer>
+    </>
   )
 }
