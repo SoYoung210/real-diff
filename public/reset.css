@@ -234,6 +234,11 @@ img {
   -ms-interpolation-mode: bicubic; /* 2 */
 }
 
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
 /**
  * Address margin not present in IE 6/7/8/9, Safari 5, and Opera 11.
  */
@@ -298,6 +303,11 @@ textarea {
 button,
 input {
   line-height: normal;
+}
+
+input {
+  background: transparent;
+  border: none;
 }
 
 button {
