@@ -25,7 +25,6 @@ const SettingLink = styled(Link)`
   min-width: 84px;
   text-align: center;
   border-radius: 8px;
-  text-decoration: none;
 `
 
 export const Footer = () => {
