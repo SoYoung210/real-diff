@@ -5,18 +5,16 @@ import { useDispatch,useSelector } from 'react-redux'
 import { IgnoredFile } from '@/domain/ignoreFile'
 import { settingActions,settingSelector } from '@/features/settingSlice'
 
-const InputWrapper = styled.div`
-  display: flex;
-`
+import { Input } from '../shared/Input'
+import { InputContainer } from '../shared/SettingInputContainer'
 
-// TODO: Refactor to shared button
-const AddButton = styled.button`
-  padding: 8px 0px;
-  margin-top: 10px;
-  background: rgba(24,205,140,0.1);
+const SaveButton = styled.button`
+  padding: 6px 0px;
+  background: #5AE9AD;
+  color: #ffffff;
   border-radius: 8px;
-  color: #18CD8C;
-  font-size: 14px;
+  font-size: 12px;
+  min-width: 82px;
 `
 
 // TODO: 폴더를 나눌지 그냥 여기서 다 쓸지 고민해서 정하기.
@@ -62,16 +60,17 @@ export const FileListSettingView = () => {
           ignoreFileList.map(renderFileList(removeItem))
         }
       </ol>
-      <InputWrapper>
-        <input
+      <InputContainer>
+        <Input
           value={fileNameToBeAdded}
+          placeholder='Add ignore file name'
           onChange={({target}) =>
             setFileNameToBeAdded(target.value)
           }
           onKeyPress={onKeyPressed}
         />
-        <AddButton onClick={addIgnoreFileName}>ADD</AddButton>
-      </InputWrapper>
+        <SaveButton onClick={addIgnoreFileName}>ADD</SaveButton>
+      </InputContainer>
     </>
   )
 }

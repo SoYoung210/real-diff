@@ -3,20 +3,8 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Input } from '@/components/shared/Input'
+import { InputContainer } from '@/components/shared/SettingInputContainer'
 import { settingActions } from '@/features/settingSlice'
-
-const InputContainer = styled.div`
-  display: flex;
-  padding: 12px 0;
-
-  & > input + button {
-    margin-left: 6px;
-  }
-
-  & > input {
-    flex: 1;
-  }
-`
 
 // TODO: Refactor to shared button
 const SaveButton = styled.button`
