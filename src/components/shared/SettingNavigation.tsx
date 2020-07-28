@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import { Link, NavLink, useRouteMatch } from 'react-router-dom'
+import { NavLink, useRouteMatch } from 'react-router-dom'
 
 import { SETTING_ROUTE_TYPE } from '@/constants/routes'
 

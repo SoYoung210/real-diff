@@ -10,15 +10,6 @@ import { settingActions,settingSelector } from '@/features/settingSlice'
 
 import { FileListItem } from './FileListItem'
 
-const SaveButton = styled.button`
-  padding: 6px 0px;
-  background: #5AE9AD;
-  color: #ffffff;
-  border-radius: 8px;
-  font-size: 12px;
-  min-width: 82px;
-`
-
 const StyledListWrapper = styled.ol`
   flex: 1;
   padding: 6px 4px 0 0;
