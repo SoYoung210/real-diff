@@ -1,20 +1,11 @@
-import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
+import { Button } from '@/components/shared/Button'
 import { Input } from '@/components/shared/Input'
 import { InputContainer } from '@/components/shared/SettingInputContainer'
 import { settingActions } from '@/features/settingSlice'
 
-// TODO: Refactor to shared button
-const SaveButton = styled.button`
-  padding: 6px 0px;
-  background: #5AE9AD;
-  color: #ffffff;
-  border-radius: 8px;
-  font-size: 12px;
-  min-width: 82px;
-`
 // https://docs.github.com/en/rest/reference/pulls#list-pull-requests-files
 export const TokenSettingView = () => {
   const dispatch = useDispatch()
@@ -34,7 +25,7 @@ export const TokenSettingView = () => {
             setToken(target.value)
           }
         />
-        <SaveButton onClick={saveToken}>Add</SaveButton>
+        <Button buttonText='ADD' onClick={saveToken} />
       </InputContainer>
     </>
   )

@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import React, { KeyboardEvent, useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 
+import { Button } from '@/components/shared/Button'
 import { ContentWrapper } from '@/components/shared/ContentWrapper'
 import { Input } from '@/components/shared/Input'
 import { InputContainer } from '@/components/shared/SettingInputContainer'
@@ -70,7 +71,7 @@ export const FileListSettingView = () => {
           }
           onKeyPress={onKeyPressed}
         />
-        <SaveButton onClick={addIgnoreFileName}>ADD</SaveButton>
+        <Button buttonText='ADD' onClick={addIgnoreFileName} />
       </InputContainer>
     </ContentWrapper>
   )
