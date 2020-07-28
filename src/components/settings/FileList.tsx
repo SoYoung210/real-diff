@@ -2,11 +2,11 @@ import styled from '@emotion/styled'
 import React, { KeyboardEvent, useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 
-import { IgnoredFile } from '@/domain/ignoreFile'
+import { ContentWrapper } from '@/components/shared/ContentWrapper'
+import { Input } from '@/components/shared/Input'
+import { InputContainer } from '@/components/shared/SettingInputContainer'
 import { settingActions,settingSelector } from '@/features/settingSlice'
 
-import { Input } from '../shared/Input'
-import { InputContainer } from '../shared/SettingInputContainer'
 import { FileListItem } from './FileListItem'
 
 const SaveButton = styled.button`
@@ -18,15 +18,10 @@ const SaveButton = styled.button`
   min-width: 82px;
 `
 
-// TODO: 폴더를 나눌지 그냥 여기서 다 쓸지 고민해서 정하기.
-const renderFileList = (
-  onClickDelete: Function,
-) => ({fileName}: IgnoredFile) => (
-  <li key={fileName}>
-    <button onClick={ () => onClickDelete(fileName)}>X {' '}</button>
-    <span>{fileName}</span>
-  </li>
-)
+const StyledListWrapper = styled.ol`
+  flex: 1;
+  padding: 6px 4px 0 0;
+`
 
 export const FileListSettingView = () => {
   const dispatch = useDispatch()
@@ -54,8 +49,8 @@ export const FileListSettingView = () => {
   }
 
   return (
-    <>
-      <ol>
+    <ContentWrapper offsetTopHeight={46}>
+      <StyledListWrapper>
         {
           ignoreFileList.map(({fileName}, idx) =>
             <FileListItem
@@ -65,7 +60,7 @@ export const FileListSettingView = () => {
             />,
           )
         }
-      </ol>
+      </StyledListWrapper>
       <InputContainer>
         <Input
           value={fileNameToBeAdded}
@@ -77,6 +72,6 @@ export const FileListSettingView = () => {
         />
         <SaveButton onClick={addIgnoreFileName}>ADD</SaveButton>
       </InputContainer>
-    </>
+    </ContentWrapper>
   )
 }
