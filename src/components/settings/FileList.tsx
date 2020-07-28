@@ -7,6 +7,7 @@ import { settingActions,settingSelector } from '@/features/settingSlice'
 
 import { Input } from '../shared/Input'
 import { InputContainer } from '../shared/SettingInputContainer'
+import { FileListItem } from './FileListItem'
 
 const SaveButton = styled.button`
   padding: 6px 0px;
@@ -54,10 +55,15 @@ export const FileListSettingView = () => {
 
   return (
     <>
-      <div>FileListSettingView</div>
       <ol>
         {
-          ignoreFileList.map(renderFileList(removeItem))
+          ignoreFileList.map(({fileName}, idx) =>
+            <FileListItem
+              key={`${fileName}-${idx}`}
+              title={fileName}
+              onClick={() => removeItem(fileName)}
+            />,
+          )
         }
       </ol>
       <InputContainer>
