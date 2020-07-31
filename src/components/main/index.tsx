@@ -28,8 +28,7 @@ export const MainView = () => {
   const dispatch = useDispatch()
   const realDiff = useSelector(prSelector.realDiff)
   useEffect(() => {
-    // TODO: Remove comment
-    // dispatch(prActions.fetch())
+    dispatch(prActions.fetch())
   },[dispatch])
 
   return (
