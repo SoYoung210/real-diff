@@ -7,10 +7,11 @@ import { Footer } from '@/components/shared/Footer'
 import { MainHeader } from '@/components/shared/MainHeader'
 import { settingActions, settingSelector } from '@/features/settingSlice'
 
+import { ContentWrapper } from '../shared/ContentWrapper'
+
 // FIXME: 중복코드
-const ContentWrapper = styled.div`
-  height: 100%;
-  background: white;
+const ContentContainer = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,11 +45,13 @@ export const HomeView = () => {
   return (
     <>
       <MainHeader title='sHow Real Diff' highlightIndex={[1, 11]}/>
-      <ContentWrapper>
-        <BoldText>Is here PR page?</BoldText>
-        <div>:thinking_face:</div>
+      <ContentWrapper offsetTopHeight={52}>
+        <ContentContainer>
+          <BoldText>Is here PR page?</BoldText>
+          <div>:thinking_face:</div>
+        </ContentContainer>
+        <Footer />
       </ContentWrapper>
-      <Footer />
     </>
   )
 }
