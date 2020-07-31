@@ -8,7 +8,7 @@ import { Input } from '@/components/shared/Input'
 import { InputContainer } from '@/components/shared/SettingInputContainer'
 import { settingActions, settingSelector } from '@/features/settingSlice'
 
-const Content = styled.p`
+const Content = styled.div`
   color: #8B95A1;
   font-size: 14px;
   line-height: 22px;
