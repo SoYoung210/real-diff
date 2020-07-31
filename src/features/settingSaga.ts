@@ -129,3 +129,25 @@ export function* watchRemoveIgnoreFile() {
     removeIgnoreFileFromStorage,
   )
 }
+
+function* checkTokenExistAtStorage() {
+  const token = yield call(
+    storageUtil.getData,
+    STORAGE_KEY.GITHUB_TOKEN,
+  )
+
+  if (!token) {
+    yield put(settingActions.checkTokenExistSuccess(FetchStatusCode.EMPTY))
+
+    return
+  }
+
+  yield put(settingActions.checkTokenExistSuccess(FetchStatusCode.OK))
+}
+
+export function* watchCheckTokenExist() {
+  yield takeLatest(
+    settingActions.checkTokenExist,
+    checkTokenExistAtStorage,
+  )
+}

@@ -11,11 +11,13 @@ interface ResponseData<T> {
   fetchState: FetchStatusCode
 }
 interface SettingInfoState {
+  tokenState: FetchStatusCode
   path: ResponseData<PathData>
   ignoreFileList: ResponseData<IgnoredFile[]>
 }
 
 const initialState: SettingInfoState = {
+  tokenState: FetchStatusCode.DEFAULT,
   path: {
     value: {
       orgName: '',
@@ -34,6 +36,15 @@ const initialState: SettingInfoState = {
 }
 
 const reducers = {
+  checkTokenExist: (state: SettingInfoState) => {
+    // empty action
+  },
+  checkTokenExistSuccess: (
+    state: SettingInfoState,
+    { payload }: PayloadAction<FetchStatusCode>,
+  ) => {
+    state.tokenState = payload
+  },
   saveToken: (state: SettingInfoState, { payload }: PayloadAction<string>) => {
     // empty action
   },
@@ -83,8 +94,12 @@ const getPathValue = (state: SettingInfoState) => state.path.value
 const getIgnoreFileList = (state: SettingInfoState) => {
   return state.ignoreFileList.value
 }
+const getIsTokenExist = (state: SettingInfoState) => {
+  return state.tokenState === FetchStatusCode.OK
+}
 
 export const settingSelector = {
+  isTokenExist: createSelector([settingState], getIsTokenExist),
   path: createSelector([settingState], getPathValue),
   ignoreFileList: createSelector([settingState], getIgnoreFileList),
   isPullRequestPath: createSelector([settingState], getIsPullRequestPath),
