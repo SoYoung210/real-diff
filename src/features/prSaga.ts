@@ -76,7 +76,7 @@ function* fetchPullRequestFiles() {
     yield put(prActions.setRealDiff(realDiff))
   } catch(error) {
     console.log('@@@ error !!!!',error)
-    yield call(redirect, `/${ROUTE.SETTINGS}/${SETTING_ROUTE_TYPE.TOKEN}`)
+    yield call(redirect, `${ROUTE.SETTINGS}/${SETTING_ROUTE_TYPE.TOKEN}`)
   }
 }
 
