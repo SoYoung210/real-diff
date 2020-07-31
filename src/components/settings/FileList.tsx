@@ -2,32 +2,20 @@ import styled from '@emotion/styled'
 import React, { KeyboardEvent, useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 
-import { IgnoredFile } from '@/domain/ignoreFile'
+import { Button } from '@/components/shared/Button'
+import { ContentWrapper } from '@/components/shared/ContentWrapper'
+import { Input } from '@/components/shared/Input'
+import { InputContainer } from '@/components/shared/SettingInputContainer'
 import { settingActions,settingSelector } from '@/features/settingSlice'
 
-const InputWrapper = styled.div`
-  display: flex;
-`
+import { FileListItem } from './FileListItem'
 
-// TODO: Refactor to shared button
-const AddButton = styled.button`
-  padding: 8px 0px;
-  margin-top: 10px;
-  background: rgba(24,205,140,0.1);
-  border-radius: 8px;
-  color: #18CD8C;
-  font-size: 14px;
+const StyledListWrapper = styled.ol`
+  flex: 1;
+  padding: 6px 4px 0 0;
+  min-height: min-content;
+  overflow: auto;
 `
-
-// TODO: 폴더를 나눌지 그냥 여기서 다 쓸지 고민해서 정하기.
-const renderFileList = (
-  onClickDelete: Function,
-) => ({fileName}: IgnoredFile) => (
-  <li key={fileName}>
-    <button onClick={ () => onClickDelete(fileName)}>X {' '}</button>
-    <span>{fileName}</span>
-  </li>
-)
 
 export const FileListSettingView = () => {
   const dispatch = useDispatch()
@@ -55,23 +43,29 @@ export const FileListSettingView = () => {
   }
 
   return (
-    <>
-      <div>FileListSettingView</div>
-      <ol>
+    <ContentWrapper offsetTopHeight={46}>
+      <StyledListWrapper>
         {
-          ignoreFileList.map(renderFileList(removeItem))
+          ignoreFileList.map(({fileName}, idx) =>
+            <FileListItem
+              key={`${fileName}-${idx}`}
+              title={fileName}
+              onClick={() => removeItem(fileName)}
+            />,
+          )
         }
-      </ol>
-      <InputWrapper>
-        <input
+      </StyledListWrapper>
+      <InputContainer>
+        <Input
           value={fileNameToBeAdded}
+          placeholder='Add ignore file name'
           onChange={({target}) =>
             setFileNameToBeAdded(target.value)
           }
           onKeyPress={onKeyPressed}
         />
-        <AddButton onClick={addIgnoreFileName}>ADD</AddButton>
-      </InputWrapper>
-    </>
+        <Button buttonText='ADD' onClick={addIgnoreFileName} />
+      </InputContainer>
+    </ContentWrapper>
   )
 }

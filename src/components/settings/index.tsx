@@ -1,47 +1,19 @@
-import styled from '@emotion/styled'
 import React from 'react'
-import { Link,NavLink,Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
+import { SettingNavigation } from '@/components/shared/SettingNavigation'
 import { SETTING_ROUTE_TYPE } from '@/constants/routes'
 
 import { FileListSettingView } from './FileList'
 import { TokenSettingView } from './Token'
 
-const StyledNavLink = styled(NavLink)`
-  &.active {
-    color: #18CD8C;
-  }
-`
-
-const StickyNav = styled.header`
-  display: flex;
-  justify-content: space-around;
-`
-
-const CloseButton = styled(Link)`
-  color: gray;
-`
-
+// TODO: 완전히 재사용 가능하도록 Title이랑 Link주입받는 것 고려해보기
 export const SettingsView = () => {
   const match = useRouteMatch()
 
   return (
     <>
-      <StickyNav>
-        <StyledNavLink
-          activeClassName='active'
-          to={`${match.url}/${SETTING_ROUTE_TYPE.FILE_LIST}`}
-        >
-          Files
-        </StyledNavLink >
-        <StyledNavLink
-          activeClassName='active'
-          to={`${match.url}/${SETTING_ROUTE_TYPE.TOKEN}`}
-        >
-          Token
-        </StyledNavLink >
-        <CloseButton to='/'>X</CloseButton>
-      </StickyNav>
+      <SettingNavigation />
       <Switch>
         <Route
           path={`${match.url}/${SETTING_ROUTE_TYPE.FILE_LIST}`}
