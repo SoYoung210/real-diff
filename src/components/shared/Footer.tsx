@@ -28,9 +28,19 @@ const SettingLink = styled(Link)`
 `
 
 export const Footer = () => {
+  const handleClick = (url: string) => {
+    chrome.tabs.create({url})
+  }
+
   return (
     <Container>
-      <RealDiffLink>real-diff@0.1.1</RealDiffLink>
+      <RealDiffLink
+        onClick={
+          () => handleClick('https://chrome.google.com/webstore/detail/real-diff/noolkogacjfdckeeclgddpabknbnjacd?hl=ko')
+        }
+      >
+        real-diff@1.0.0
+      </RealDiffLink>
       <SettingLink to={`${ROUTE.SETTINGS}/${SETTING_ROUTE_TYPE.TOKEN}`}>
         Config
       </SettingLink>
