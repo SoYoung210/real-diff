@@ -53,6 +53,10 @@ export const TokenSettingView = () => {
     dispatch(settingActions.saveToken(token))
   }
 
+  const handleClick = (url: string) => {
+    chrome.tabs.create({url})
+  }
+
   return (
     <>
       <ContentWrapper offsetTopHeight={46}>
@@ -63,7 +67,9 @@ export const TokenSettingView = () => {
               <>
                 <BoldText>200 Token Exist!</BoldText>
                 <StyledLink
-                  href='https://chrome.google.com/webstore/detail/real-diff/noolkogacjfdckeeclgddpabknbnjacd?hl=ko&'
+                  onClick={
+                    () => handleClick('https://chrome.google.com/webstore/detail/real-diff/noolkogacjfdckeeclgddpabknbnjacd?hl=ko&')
+                  }
                 >
                   Review Real Diff
                 </StyledLink>
@@ -74,7 +80,9 @@ export const TokenSettingView = () => {
               <>
                 <BoldText>404 NotFound</BoldText>
                 <StyledLink
-                  href='https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token'
+                  onClick={
+                    () => handleClick('https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token')
+                  }
                   rel="nofollow"
                 >
                   Please Add GitHub Auth Token
