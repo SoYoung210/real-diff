@@ -7,6 +7,7 @@ import { Footer } from '@/components/shared/Footer'
 import { MainHeader } from '@/components/shared/MainHeader'
 import { settingActions, settingSelector } from '@/features/settingSlice'
 
+// FIXME: 중복코드
 const ContentWrapper = styled.div`
   height: 100%;
   background: white;
@@ -19,6 +20,7 @@ const ContentWrapper = styled.div`
   line-height: 22px;
 `
 
+// FIXME: 중복코드
 const BoldText = styled.div`
   font-weight: 900;
 `
