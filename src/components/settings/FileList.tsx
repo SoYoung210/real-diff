@@ -13,6 +13,8 @@ import { FileListItem } from './FileListItem'
 const StyledListWrapper = styled.ol`
   flex: 1;
   padding: 6px 4px 0 0;
+  min-height: min-content;
+  overflow: auto;
 `
 
 export const FileListSettingView = () => {

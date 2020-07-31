@@ -3,7 +3,7 @@ import React from 'react'
 
 const StyledInputContainer = styled.div`
   display: flex;
-  padding: 12px 0;
+  padding-top: 12px;
 
   & > input + button {
     margin-left: 6px;

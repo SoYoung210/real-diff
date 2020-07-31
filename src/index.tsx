@@ -15,6 +15,9 @@ import { ROUTE } from './constants/routes'
 sagaMiddleware.run(rootSaga)
 
 const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   margin: 10px;
   width: 320px;
   height: 240px;

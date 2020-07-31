@@ -10,10 +10,10 @@ import { settingActions, settingSelector } from '@/features/settingSlice'
 
 const Content = styled.p`
   color: #8B95A1;
-  height: 100%;
   font-size: 14px;
   line-height: 22px;
   display: flex;
+  flex: 1;
   justify-content: center;
   flex-direction: column;
   align-items: center;
