@@ -6,10 +6,9 @@ import { all } from 'redux-saga/effects'
 import { watchFetchPullRequest } from './prSaga'
 import { PR_SLICE,prReducer } from './prSlice'
 import {
-  watchAddIgnoreFile,
   watchCheckTokenExist,
-  watchRemoveIgnoreFile,
   watchRequestPath,
+  watchSaveIgnoreFile,
   watchSaveUserToken,
   watchSyncIgnoreFileList,
 } from './settingSaga'
@@ -27,8 +26,7 @@ export function* rootSaga() {
     watchFetchPullRequest(),
     watchRequestPath(),
     watchSyncIgnoreFileList(),
-    watchAddIgnoreFile(),
-    watchRemoveIgnoreFile(),
+    watchSaveIgnoreFile(),
     watchCheckTokenExist(),
   ])
 }

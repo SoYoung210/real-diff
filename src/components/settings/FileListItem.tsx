@@ -30,7 +30,7 @@ export const FileListItem = ({title, onClick}: Props) => {
   return (
     <ListItem>
       {title}
-      <RemoveButton bg={removeIcon}/>
+      <RemoveButton onClick={onClick} bg={removeIcon}/>
     </ListItem>
   )
 }

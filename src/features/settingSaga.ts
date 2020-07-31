@@ -90,43 +90,25 @@ export function* watchSyncIgnoreFileList() {
   )
 }
 
-function* addIgnoreFileToStorage({payload}: PayloadAction<IgnoredFile>) {
+function* saveIgnoreFileToStorage() {
   const existFileList: IgnoredFile[] = yield select(
     settingSelector.ignoreFileList,
   )
   yield call(
     storageUtil.saveData,
     STORAGE_KEY.IGNORE_FILE_LIST,
-    existFileList.concat(payload),
+    existFileList,
   )
 }
 
-export function* watchAddIgnoreFile() {
+export function* watchSaveIgnoreFile() {
   yield takeLatest(
     settingActions.addIgnoreFile,
-    addIgnoreFileToStorage,
+    saveIgnoreFileToStorage,
   )
-}
-
-function* removeIgnoreFileFromStorage({payload}: PayloadAction<string>) {
-  const currentFileList: IgnoredFile[] = yield select(settingSelector.ignoreFileList)
-  const updatedFileList = currentFileList.filter(
-    ({fileName}) => fileName !== payload,
-  )
-
-  yield call(
-    storageUtil.saveData,
-    STORAGE_KEY.IGNORE_FILE_LIST,
-    updatedFileList,
-  )
-
-  yield put(settingActions.setIgnoreFileListSuccess(updatedFileList))
-}
-
-export function* watchRemoveIgnoreFile() {
   yield takeLatest(
     settingActions.removeIgnoreFile,
-    removeIgnoreFileFromStorage,
+    saveIgnoreFileToStorage,
   )
 }
 
