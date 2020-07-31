@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { CSSProperties,useEffect,useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '@/components/shared/Button'
