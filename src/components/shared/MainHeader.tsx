@@ -28,7 +28,7 @@ export const MainHeader = ({title, highlightIndex}: Props) => {
       {
         title.split('').map((s, idx) => {
           if (highlightIndex.includes(idx)) {
-            return <HighlightText>{s}</HighlightText>
+            return <HighlightText key={`${s}-${idx}`}>{s}</HighlightText>
           }
 
           return s
