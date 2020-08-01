@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { Link,NavLink, useRouteMatch } from 'react-router-dom'
 
-import { SETTING_ROUTE_TYPE } from '@/constants/routes'
+import { ROUTE,SETTING_ROUTE_TYPE } from '@/constants/routes'
 
 const BackButton =styled(Link)`
   background: url('/assets/return.svg') center no-repeat;
@@ -33,7 +33,7 @@ export const SettingNavigation = () => {
 
   return (
     <StickyNav>
-      <BackButton to='/main' />
+      <BackButton to={ROUTE.MAIN} />
       <StyledNavLink
         activeClassName='active'
         to={`${match.url}/${SETTING_ROUTE_TYPE.FILE_LIST}`}
