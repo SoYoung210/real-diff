@@ -58,6 +58,9 @@ export const prActions = slice.actions
 const prState = (state: RootState) => state[PR_SLICE]
 
 const getRealDiff = (state: PullRequestFilesState) => state.realDiff
+const getFetchState = (state: PullRequestFilesState) => state.fetchState
+
 export const prSelector = {
   realDiff: createSelector([prState], getRealDiff),
+  fetchState: createSelector([prState], getFetchState),
 }
