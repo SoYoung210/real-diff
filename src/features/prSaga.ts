@@ -4,12 +4,11 @@ import { pullRequestAPI } from '@/api'
 import { ROUTE, SETTING_ROUTE_TYPE } from '@/constants/routes'
 import { IgnoredFile } from '@/domain/ignoreFile'
 import { PullRequestData } from '@/domain/pullRequest'
+import { prActions } from '@/features/prSlice'
 import { settingSelector } from '@/features/settingSlice'
 import { redirect } from '@/utils/history'
 import { filterIgnoredFiles } from '@/utils/ignoredFileFilter'
 import { STORAGE_KEY,storageUtil } from '@/utils/storage'
-
-import { prActions } from './prSlice'
 
 function* fetchPullRequestFiles() {
   try {
@@ -76,6 +75,7 @@ function* fetchPullRequestFiles() {
     yield put(prActions.setRealDiff(realDiff))
   } catch(error) {
     console.log('@@@ error !!!!',error)
+    yield put(prActions.fail(error.response?.status))
     yield call(redirect, `${ROUTE.SETTINGS}/${SETTING_ROUTE_TYPE.TOKEN}`)
   }
 }
