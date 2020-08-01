@@ -30,16 +30,13 @@ const reducers = {
   fetch: (state: PullRequestFilesState) => {
     state.fetchState = FetchStatusCode.LOADING
   },
-  success: (state: PullRequestFilesState, { payload }: PayloadAction<PullRequestFilesData[]>) => {
-    state.data = payload
-    state.fetchState = FetchStatusCode.OK
-  },
   fail: (state: PullRequestFilesState, { payload }: PayloadAction<FetchStatusCode>) => {
     state.data = initialState.data
     state.fetchState = payload
   },
   setRealDiff: (state: PullRequestFilesState, { payload }: PayloadAction<RealDiffData>) => {
     state.realDiff = payload
+    state.fetchState = FetchStatusCode.OK
   },
 }
 
