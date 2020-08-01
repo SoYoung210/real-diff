@@ -4,7 +4,7 @@
 
 **Chrome Extension for Calculate Pull Request's Real Diff.**
 
-Currently, changes to `package-lock.json` and `yarn.lock` are excluded from Pull Request file changes.
+By default, changes to the `package-lock.json` and `yarn.lock` files are excluded. In the Ignore tab of the Config page, additional files to be ignored can be added.
 
 ## Install
 
@@ -14,9 +14,9 @@ Chrome Extension > [Link](https://chrome.google.com/webstore/detail/octodirect/n
 
 1. Create your personal token at GitHub Settings with this [guide](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token).
 
-2. Save your token at 'Setting' page
+2. Save your token at Token Setting page
 
-|            **Click Setting**            |           **Save**            |
+|            **Click Config**            |           **Save Your Personal Token**            |
 | :------------------------------: | :----------------------------: |
 | ![main page](assets/setting_page_1.png) | ![setting page](assets/setting_page_2.png) |
 
