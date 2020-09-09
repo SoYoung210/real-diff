@@ -1,8 +1,24 @@
 name: Sync
 on:
-  push:
-    branches:
-      - master
+  check_run:
+    types:
+      # Check runs completing successfully can unblock the
+      # corresponding pull requests and make them mergeable.
+      - completed
+  pull_request:
+    types:
+      # A closed pull request makes the checks on the other
+      # pull request on the same base outdated.
+      - closed
+  pull_request_review:
+    types:
+      # Review approvals can unblock the pull request and
+      # make it mergeable.
+      - submitted
+  # Success statuses can unblock the corresponding
+  # pull requests and make them mergeable.
+  status: {}
+
 jobs:
   sync_branch:
     name: Syncing branches
