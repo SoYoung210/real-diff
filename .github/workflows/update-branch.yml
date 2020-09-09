@@ -1,41 +1,17 @@
-name: Sync
+name: autoupdate
 on:
-  check_run:
-    types:
-      # Check runs completing successfully can unblock the
-      # corresponding pull requests and make them mergeable.
-      - completed
-  pull_request:
-    types:
-      # A closed pull request makes the checks on the other
-      # pull request on the same base outdated.
-      - closed
-  pull_request_review:
-    types:
-      # Review approvals can unblock the pull request and
-      # make it mergeable.
-      - submitted
-  status: {}
-
+  # This will trigger on all pushes to all branches.
+  push: {}
+  # Alternatively, you can only trigger if commits are pushed to certain branches, e.g.:
+  # push:
+  #   branches:
+  #     - master
+  #     - unstable
 jobs:
-  sync_branch:
-    name: Syncing branches
-    runs-on: ubuntu-latest
+  autoupdate:
+    name: autoupdate
+    runs-on: ubuntu-18.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Sync branches
-        uses: tibdex/autosquash@v2
-        with:
-          # We can't use the built-in secrets.GITHUB_TOKEN yet because of this limitation:
-          # https://github.community/t5/GitHub-Actions/Triggering-a-new-workflow-from-another-workflow/td-p/31676
-          # In the meantime, use a token granting write access on the repo:
-          # - a GitHub App token
-          #   See https://github.com/marketplace/actions/github-app-token.
-          # - a personal access token
-          #   See https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line.
-          github_token: ${{ secrets.SOSO_TOKEN }}
+      - uses: docker://chinthakagodawita/autoupdate-action:v1
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
