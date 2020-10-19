@@ -13,10 +13,10 @@ const getFileName = (fileNameWithPath: string) => {
 export const filterIgnoredFiles = (ignoredList: string[]) => (
   filename: string,
 ) => {
-  const result = ignoredList.find(pattern => {
+  const isMatched = !!ignoredList.find(pattern => {
     const [matched] = minimatch.match([filename], pattern, {matchBase: true});
     return !!matched;
   })
 
-  return !!result;
+  return isMatched;
 }
