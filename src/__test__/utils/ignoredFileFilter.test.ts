@@ -27,4 +27,31 @@ describe('filterIgnoredFiles Test', () => {
     // Then
     expect(result).toBe(false)
   })
+
+  it('Glob Pattern이 일치하는 경우 true를 반환 - 얕은 경로' ,() => {
+    // Given
+    const ignoredList = ['mock/*']
+    // When
+    const result = filterIgnoredFiles(ignoredList)('mock/mock1.tsx')
+    // Then
+    expect(result).toBe(true)
+  })
+
+  it('Glob Pattern이 일치하는 경우 true를 반환 - 깊은 경로' ,() => {
+    // Given
+    const ignoredList = ['mock/**/*.tsx']
+    // When
+    const result = filterIgnoredFiles(ignoredList)('mock/test/mock1.tsx')
+    // Then
+    expect(result).toBe(true)
+  })
+
+  it('Glob Pattern이 일치하지 않는 경우 false를 반환' ,() => {
+    // Given
+    const ignoredList = ['mock/*']
+    // When
+    const result = filterIgnoredFiles(ignoredList)('mock/test/mock1.tsx')
+    // Then
+    expect(result).toBe(false)
+  })
 })
