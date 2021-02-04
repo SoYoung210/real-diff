@@ -1,6 +1,9 @@
 {
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
+    "types": [
+      "@emotion/react/types/css-prop"
+    ],
     "target": "es5",
     "lib": [
       "dom",
