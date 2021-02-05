@@ -18,3 +18,11 @@ export const flex = (options?: FlexOptions) => {
     justify-content: ${justify};
   `
 }
+
+export const horizontalGutter = (space: number) => {
+  return css`
+    & > * + * {
+      margin-left: ${space}px;
+    }
+  `
+}
