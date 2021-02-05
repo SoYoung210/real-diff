@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { InputHTMLAttributes } from 'react'
+import React, { InputHTMLAttributes, ReactText } from 'react'
 
 const StyledInput = styled.input`
   padding: 6px 14px;
@@ -16,7 +16,7 @@ const StyledInput = styled.input`
 `
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  value: string;
+  value: ReactText;
   placeholder?: string;
 }
 
