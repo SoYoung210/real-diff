@@ -5,7 +5,7 @@ const useEnhancedEffect = typeof window !== 'undefined' ? useLayoutEffect : useE
 /**
  * https://github.com/facebook/react/issues/14099#issuecomment-440013892
  */
-export default function useEventCallback<P extends any[], Return = void>(
+export function useEventCallback<P extends any[], Return = void>(
   callback: (...args: P) => Return,
 ) {
   const ref = useRef(callback)

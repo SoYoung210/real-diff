@@ -1,6 +1,6 @@
 import { ChangeEvent, ReactText, useState } from 'react'
 
-import useEventCallback from './useEventCallback'
+import { useEventCallback } from './useEventCallback'
 
 export const useControlledInput = (initialValue: ReactText) => {
   const [value, setValue] = useState(initialValue)
