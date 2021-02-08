@@ -15,9 +15,11 @@ export const useFileListStorage = () => {
   )
   const [fileList, setFileList] = useState(fileListFromStorage)
 
-  const add = useCallback((fileName: string) => {
-    const newItem = [...fileListFromStorage, fileName]
+  const add = useCallback((fileName: string | string[]) => {
+    const newItem =
+      Array.isArray(fileName) ? [...fileListFromStorage, ...fileName] : [...fileListFromStorage, fileName]
     settingStorage.setItem(STORAGE_KEY, newItem)
+
     setFileList(newItem)
   }, [fileListFromStorage, settingStorage])
 
@@ -25,6 +27,7 @@ export const useFileListStorage = () => {
     const newItem = fileListFromStorage.filter((existFileName) => {
       return existFileName !== fileName
     })
+
     settingStorage.setItem(STORAGE_KEY, newItem)
     setFileList(newItem)
   }, [fileListFromStorage, settingStorage])
