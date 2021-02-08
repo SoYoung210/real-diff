@@ -22,7 +22,7 @@ export const FileListSettingView = () => {
         {
           fileListFromStorage.map((fileName) => {
             return (
-              <ListItem key={ }>
+              <ListItem key={fileName}>
 
               </ListItem>
             )
