@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 import React, { FormEvent } from 'react'
 
+import removeIcon from '@/assets/close.svg'
+import { IconButton } from '@/shared/components/button/IconButton'
 import { TextButton } from '@/shared/components/button/TextButton'
 import { ContentWrapper } from '@/shared/components/ContentWrapper'
 import { Input } from '@/shared/components/Input'
@@ -9,21 +11,23 @@ import { useControlledInput } from '@/shared/hooks/useControlledInput'
 import { flex, horizontalGutter } from '@/shared/utils/styles'
 
 import { useFileListStorage } from './hooks/useFileList'
-
 // TODO: duplicate item validation
 export const FileListSettingView = () => {
   const [fileName, , handleFileNameChange] = useControlledInput('')
-  const { add, fileListFromStorage } = useFileListStorage()
+  const { add, remove, fileListFromStorage } = useFileListStorage()
 
   return (
     <ContentWrapper offsetTopHeight={46}>
       <FileList css={flex()}>
-        { /** shared/ListItem과 RemoveButton사용 */}
         {
           fileListFromStorage.map((fileName) => {
             return (
               <ListItem key={fileName}>
-
+                <IconButton
+                  type='button'
+                  onClick={() => remove(fileName)}
+                  bg={removeIcon}
+                />
               </ListItem>
             )
           })
