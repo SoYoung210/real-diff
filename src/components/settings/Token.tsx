@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '@/components/shared/Button'
@@ -54,7 +54,7 @@ export const TokenSettingView = () => {
   }
 
   const handleClick = (url: string) => {
-    chrome.tabs.create({url})
+    chrome.tabs.create({ url })
   }
 
   return (
@@ -63,33 +63,33 @@ export const TokenSettingView = () => {
         <Content>
           {
             isTokenExist
-            ? (
-              <>
-                <BoldText>200 Token Exist!</BoldText>
-                <StyledLink
-                  onClick={
-                    () => handleClick('https://chrome.google.com/webstore/detail/real-diff/noolkogacjfdckeeclgddpabknbnjacd?hl=ko&')
-                  }
-                >
-                  Review Real Diff
+              ? (
+                <>
+                  <BoldText>200 Token Exist!</BoldText>
+                  <StyledLink
+                    onClick={
+                      () => handleClick('https://chrome.google.com/webstore/detail/real-diff/noolkogacjfdckeeclgddpabknbnjacd?hl=ko&')
+                    }
+                  >
+                    Review Real Diff
                 </StyledLink>
-                <SmallText>:pray:</SmallText>
-              </>
-            )
-            : (
-              <>
-                <BoldText>404 NotFound</BoldText>
-                <StyledLink
-                  onClick={
-                    () => handleClick('https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token')
-                  }
-                  rel="nofollow"
-                >
-                  Please Add GitHub Auth Token
+                  <SmallText>:pray:</SmallText>
+                </>
+              )
+              : (
+                <>
+                  <BoldText>404 NotFound</BoldText>
+                  <StyledLink
+                    onClick={
+                      () => handleClick('https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token')
+                    }
+                    rel="nofollow"
+                  >
+                    Please Add GitHub Auth Token
                 </StyledLink>
-                <SmallText>:sob:</SmallText>
-              </>
-            )
+                  <SmallText>:sob:</SmallText>
+                </>
+              )
           }
         </Content>
       </ContentWrapper>

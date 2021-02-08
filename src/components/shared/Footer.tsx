@@ -29,7 +29,7 @@ const SettingLink = styled(Link)`
 
 export const Footer = () => {
   const handleClick = (url: string) => {
-    chrome.tabs.create({url})
+    chrome.tabs.create({ url })
   }
 
   return (
