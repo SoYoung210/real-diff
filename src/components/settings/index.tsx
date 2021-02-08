@@ -28,3 +28,25 @@ export const SettingsView = () => {
     </>
   )
 }
+
+// export const SettingsView = () => {
+//   const match = useRouteMatch()
+
+//   return (
+//     <>
+//       <SettingNavigation />
+//       <FlexColumnHeight offsetTopHeight={46}>
+//         <Switch>
+//           <Route
+//             path={`${match.url}/${SETTING_ROUTE_TYPE.FILE_LIST}`}
+//             component={FileListSettingView}
+//           />
+//           <Route
+//             path={`${match.url}/${SETTING_ROUTE_TYPE.TOKEN}`}
+//             component={TokenSettingView}
+//           />
+//         </Switch>
+//       </FlexColumnHeight>
+//     </>
+//   )
+// }

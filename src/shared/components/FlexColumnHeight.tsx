@@ -1,4 +1,5 @@
-import styled from '@emotion/styled'
+import { Theme } from '@emotion/react'
+import styled, { Interpolation } from '@emotion/styled'
 import React, { CSSProperties } from 'react'
 
 const StyledContentWrapper = styled.div`
@@ -9,15 +10,18 @@ const StyledContentWrapper = styled.div`
 
 interface Props {
   children: React.ReactNode;
-  offsetTopHeight: number
+  offsetTopHeight: number;
+  // emotion css prop과 다른 이름으로 전달
+  cssProp?: Interpolation<Theme>
 }
 
-export const ContentWrapper = ({
+export const FlexColumnHeight = ({
   children,
   offsetTopHeight,
+  cssProp,
 }: Props) => {
   return (
-    <StyledContentWrapper height={offsetTopHeight}>
+    <StyledContentWrapper height={offsetTopHeight} css={cssProp}>
       {children}
     </StyledContentWrapper>
   )

@@ -5,12 +5,12 @@ import React, { FormEvent, useEffect } from 'react'
 import removeIcon from '@/assets/close.svg'
 import { IconButton } from '@/shared/components/button/IconButton'
 import { TextButton } from '@/shared/components/button/TextButton'
-import { ContentWrapper } from '@/shared/components/ContentWrapper'
+import { FlexColumnHeight } from '@/shared/components/FlexColumnHeight'
 import { Input } from '@/shared/components/Input'
 import { ListItem } from '@/shared/components/ListItem'
 import { useControlledInput } from '@/shared/hooks/useControlledInput'
 import { isEmpty } from '@/shared/utils/collection'
-import { absolute, flex, horizontalGutter, widthLayout } from '@/shared/utils/styles'
+import { absolute, flex, heightLayout, horizontalGutter, relative, widthLayout } from '@/shared/utils/styles'
 
 import { useFileListStorage } from './hooks/useFileList'
 
@@ -34,7 +34,7 @@ export const FileListSettingView = () => {
   }, [add, fileListFromStorage])
 
   return (
-    <ContentWrapper offsetTopHeight={46}>
+    <div css={[relative, heightLayout('full')]}>
       <FileList>
         {
           fileListFromStorage.map((fileName, index) => {
@@ -69,7 +69,7 @@ export const FileListSettingView = () => {
         />
         <TextButton>ADD</TextButton>
       </form>
-    </ContentWrapper>
+    </div>
   )
 }
 
