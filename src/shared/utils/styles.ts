@@ -26,3 +26,31 @@ export const horizontalGutter = (space: number) => {
     }
   `
 }
+
+export const widthLayout = (size: 'full' | 'half') => {
+  return css`
+    width: ${size === 'full' ? '100%' : '50%'};
+  `
+}
+
+interface AbsoluteOptions {
+  top?: CSSProperties['top'];
+  bottom?: CSSProperties['bottom'];
+  left?: CSSProperties['left'];
+  right?: CSSProperties['right'];
+}
+
+export const absolute = ({
+  top = 'unset',
+  bottom = 'unset',
+  left = 'unset',
+  right = 'unset',
+}: AbsoluteOptions) => {
+  return css`
+    position: absolute;
+    top: ${top};
+    bottom: ${bottom};
+    left: ${left};
+    right: ${right};
+  `
+}
