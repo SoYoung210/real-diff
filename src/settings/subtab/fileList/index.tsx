@@ -18,7 +18,7 @@ export const FileListSettingView = () => {
 
   return (
     <ContentWrapper offsetTopHeight={46}>
-      <FileList css={flex()}>
+      <FileList>
         {
           fileListFromStorage.map((fileName, index) => {
             return (
