@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import { getStorage } from '@/shared/utils/storage'
 
@@ -13,16 +13,21 @@ export const useFileListStorage = () => {
     settingStorage.getItem<string[]>(STORAGE_KEY, []) ?? [],
     [settingStorage],
   )
+  const [fileList, setFileList] = useState(fileListFromStorage)
 
   const add = useCallback((fileName: string) => {
-    settingStorage.setItem(STORAGE_KEY, [...fileListFromStorage, fileName])
+    const newItem = [...fileListFromStorage, fileName]
+    settingStorage.setItem(STORAGE_KEY, newItem)
+    setFileList(newItem)
   }, [fileListFromStorage, settingStorage])
 
   const remove = useCallback((fileName: string) => {
-    settingStorage.setItem(STORAGE_KEY, fileListFromStorage.filter((existFileName) => {
+    const newItem = fileListFromStorage.filter((existFileName) => {
       return existFileName !== fileName
-    }))
+    })
+    settingStorage.setItem(STORAGE_KEY, newItem)
+    setFileList(newItem)
   }, [fileListFromStorage, settingStorage])
 
-  return { add, remove, fileListFromStorage }
+  return { add, remove, fileListFromStorage: fileList }
 }

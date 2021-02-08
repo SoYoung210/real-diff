@@ -13,16 +13,17 @@ import { flex, horizontalGutter } from '@/shared/utils/styles'
 import { useFileListStorage } from './hooks/useFileList'
 // TODO: duplicate item validation
 export const FileListSettingView = () => {
-  const [fileName, , handleFileNameChange] = useControlledInput('')
+  const [fileName, setFileName, handleFileNameChange] = useControlledInput('')
   const { add, remove, fileListFromStorage } = useFileListStorage()
 
   return (
     <ContentWrapper offsetTopHeight={46}>
       <FileList css={flex()}>
         {
-          fileListFromStorage.map((fileName) => {
+          fileListFromStorage.map((fileName, index) => {
             return (
-              <ListItem key={fileName}>
+              <ListItem key={`${fileName}-${index}`}>
+                {fileName}
                 <IconButton
                   type='button'
                   onClick={() => remove(fileName)}
@@ -37,6 +38,8 @@ export const FileListSettingView = () => {
         css={[flex(), horizontalGutter(6)]}
         onSubmit={(e: FormEvent) => {
           e.preventDefault()
+
+          setFileName('')
           add(fileName as string)
         }}
       >
