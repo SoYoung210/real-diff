@@ -15,7 +15,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   minWidth?: number;
 }
 
-export const Button = ({
+export const TextButton = ({
   children,
   minWidth = 82,
   ...rest

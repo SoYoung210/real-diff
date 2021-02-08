@@ -1,26 +1,39 @@
 import styled from '@emotion/styled'
 import React, { FormEvent } from 'react'
 
-import { Button } from '@/shared/components//Button'
 import { ContentWrapper } from '@/shared/components/ContentWrapper'
 import { Input } from '@/shared/components/Input'
+import { ListItem } from '@/shared/components/ListItem'
+import { TextButton } from '@/shared/components/TextButton'
 import { useControlledInput } from '@/shared/hooks/useControlledInput'
 import { flex, horizontalGutter } from '@/shared/utils/styles'
 
+import { useFileListStorage } from './hooks/useFileList'
 
+// TODO: duplicate item validation
 export const FileListSettingView = () => {
   const [fileName, , handleFileNameChange] = useControlledInput('')
-  // const handleFileNameSubmit = useEventCallback()
+  const { add, fileListFromStorage } = useFileListStorage()
 
   return (
     <ContentWrapper offsetTopHeight={46}>
       <FileList css={flex()}>
         { /** shared/ListItem과 RemoveButton사용 */}
+        {
+          fileListFromStorage.map((fileName) => {
+            return (
+              <ListItem key={ }>
+
+              </ListItem>
+            )
+          })
+        }
       </FileList>
       <form
         css={[flex(), horizontalGutter(6)]}
         onSubmit={(e: FormEvent) => {
           e.preventDefault()
+          add(fileName as string)
         }}
       >
         <Input
@@ -28,7 +41,7 @@ export const FileListSettingView = () => {
           placeholder='Add ignore file name'
           onChange={handleFileNameChange}
         />
-        <Button>ADD</Button>
+        <TextButton>ADD</TextButton>
       </form>
     </ContentWrapper>
   )
