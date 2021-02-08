@@ -1,14 +1,12 @@
 const path = require('path')
 const resolve = arg => path.resolve(__dirname, arg)
-const emotionPresetOptions = {}
-
-const emotionBabelPreset = require('@emotion/babel-preset-css-prop').default(
-  undefined,
-  emotionPresetOptions,
-)
 
 module.exports = function() {
   return {
+    babel: {
+      'presets': ['@emotion/babel-preset-css-prop'],
+      'plugins': ['@emotion/babel-plugin'],
+    },
     webpack: {
       alias: {
         '@': resolve('src'),
