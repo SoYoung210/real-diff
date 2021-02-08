@@ -9,17 +9,6 @@ const emotionBabelPreset = require('@emotion/babel-preset-css-prop').default(
 
 module.exports = function() {
   return {
-    babel: {
-      plugins: [
-        [
-          'emotion',
-          {
-            labelFormat: '[filename]--[local]',
-          },
-        ],
-        ...emotionBabelPreset.plugins,
-      ],
-    },
     webpack: {
       alias: {
         '@': resolve('src'),
