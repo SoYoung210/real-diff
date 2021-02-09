@@ -26,6 +26,15 @@ export const horizontalGutter = (space: number) => {
     }
   `
 }
+
+export const verticalGutter = (space: number) => {
+  return css`
+    & > * + * {
+      margin-top: ${space}px;
+    }
+  `
+}
+
 type SizeOption = 'full' | 'half'
 export const widthLayout = (size: SizeOption) => {
   return css`
@@ -60,5 +69,24 @@ export const absolute = ({
     bottom: ${bottom};
     left: ${left};
     right: ${right};
+  `
+}
+
+type FontWeightOptions = 'normal' | 'bold'
+
+export const fontWeight = (weight: FontWeightOptions) => {
+  const weightOptionToNumber = (weight: FontWeightOptions) => {
+    switch (weight) {
+      case 'bold':
+        return 900
+      case 'normal':
+        return 500
+      default:
+        return 500
+    }
+  }
+
+  return css`
+    font-weight: ${weightOptionToNumber(weight)}
   `
 }
