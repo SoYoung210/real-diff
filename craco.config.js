@@ -4,14 +4,8 @@ const resolve = arg => path.resolve(__dirname, arg)
 module.exports = function() {
   return {
     babel: {
-      plugins: [
-        [
-          'emotion',
-          {
-            labelFormat: '[filename]--[local]',
-          },
-        ],
-      ],
+      'presets': ['@emotion/babel-preset-css-prop'],
+      'plugins': ['@emotion/babel-plugin'],
     },
     webpack: {
       alias: {
