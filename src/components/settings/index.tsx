@@ -3,9 +3,10 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
 import { SettingNavigation } from '@/components/shared/SettingNavigation'
 import { SETTING_ROUTE_TYPE } from '@/constants/routes'
-import { FileListSettingView } from '@/settings/subtab/fileList'
 
-// import { FileListSettingView } from './FileList'
+// import { FileListSettingView } from '@/settings/subtab/fileList'
+// import { TokenSettingView } from '@/settings/subtab/token'
+import { FileListSettingView } from './FileList'
 import { TokenSettingView } from './Token'
 
 // TODO: 완전히 재사용 가능하도록 Title이랑 Link주입받는 것 고려해보기
